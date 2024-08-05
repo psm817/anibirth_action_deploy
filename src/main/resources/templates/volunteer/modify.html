@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 justify-center items-center">
+    <div class="container volunteer-box">
+        <div class="card w-[100%]">
+            <div class="modify-form">
+                <div class="title-box">
+                    <h1>봉사활동 > 수정하기</h1>
+                </div>
+                <div class="modify-input">
+                    <form th:action="@{|/volunteer/modify/${volunteer.id}|}" method="POST" onsubmit="submitVolunteerForm(this); return false;" enctype="multipart/form-data">
+                        <div class="type-box name-box">
+                            <span class="font-weight">봉사명<span class="text-red-600">*</span></span>
+                            <input type="text" id="title" maxlength="200" name="title" th:placeholder="${volunteer.title}">
+                        </div>
+                        <div class="type-box date-box">
+                            <span>봉사 시작 날짜<span class="text-red-600">*</span></span>
+                            <input type="datetime-local" id="startDate" name="startDate">
+                        </div>
+                        <div class="type-box date-box">
+                            <span>봉사 끝나는 날짜<span class="text-red-600">*</span></span>
+                            <input type="datetime-local" id="endDate" name="endDate">
+                        </div>
+                        <div class="type-box date-box">
+                            <span>신청 마감 날짜<span class="text-red-600">*</span></span>
+                            <input type="date" id="deadLineDate" name="deadLineDate">
+                        </div>
+                        <div class="type-box location-box">
+                            <span>봉사 장소<span class="text-red-600">*</span></span>
+                            <input type="text" name="location" id="location" placeholder="봉사장소를 검색하세요.">
+                            <button type="button" class="btn btn-primary" onclick="openKakaoMapModal()">장소 검색</button>
+                        </div>
+                        <div class="type-box limit-box">
+                            <span>모집 인원<span class="text-red-600">*</span></span>
+                            <input type="number" name="limit" id="limit">
+                        </div>
+                        <div class="type-box img-box">
+                            <span>대표 이미지<span class="text-red-600">*</span></span>
+                            <input class="file-box" type="file" name="thumbnailImg" onchange="previewImage(event)">
+                        </div>
+                        <div class="type-box content-box">
+                            <span>봉사 내용<span class="text-red-600">*</span></span>
+                            <textarea name="content" id="content" class="form-control" rows="7" th:placeholder="${volunteer.title}"></textarea>
+                        </div>
+                        <div class="type-box signup-btn flex justify-center">
+                            <button class="btn btn-primary cancel" type="button" onclick="if(confirm('봉사활동 수정을 취소하시겠습니까?')) { window.location.href='/volunteer/list'; }">취소</button>
+                            <button class="btn btn-primary check" type="submit" id="submitButton">수정</button>
+                        </div>
+                        <div class="absolute-box">
+                            <img id="preview" th:src="@{/images/default_img.png}" alt="대표이미지 미리보기">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 카카오맵 검색 모달창 -->
+    <div id="kakaoMapModal">
+        <div class="modal-content">
+            <h2>봉사 장소 검색하기</h2>
+            <button type="button" class="btn close" onclick="closeKakaoMapModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="search-box">
+                <input type="text" id="keyword" placeholder="검색어를 입력하세요">
+                <button type="button" class="btn btn-warning" onclick="searchPlaces()">검색</button>
+            </div>
+            <div class="map" id="map" style="width:100%;height:400px;margin-top:10px;"></div>
+            <ul class="placesList" id="placesList" style="height:200px; overflow-y:auto; margin-top:10px;"></ul>
+            <button type="button" id="selectButton" style="display:none;" onclick="selectPlace()">선택</button>
+        </div>
+    </div>
+</section>
+</html>

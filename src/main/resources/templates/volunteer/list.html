@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="/resource/css/admCreate.css" rel="stylesheet" type="text/css" />
+        <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="main-container-box">
+            <div class="volunteer">
+                <div class="volunteer-wrapper">
+                    <img src="https://cdn.healingnlife.com/news/photo/202103/1042_1700_155.jpg" alt="Dog Shelter"
+                         class="background-image grid w-full h-[500px] ">
+                </div>
+                <div class="text-overlay-v">
+                    <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">봉사활동</h1>
+                    <br>
+                    <p class="mt-4 text-sm sm:text-base md:text-lg lg:text-xl">애니버스의 봉사활동은 유기동물들이 따뜻한 가정을 찾을 수 있도록 돕는 것을 목표로 합니다.<br>
+                        여러분의 작은 손길이 큰 사랑이 되어, 유기동물들에게 새로운 희망을 선물할 수 있습니다.<br>
+                    </p>
+                </div>
+                <div class="container summary-box">
+                    <!-- 소메뉴 뽑기 -->
+                    <div class="tiny-menu-box">
+                        <a th:href="@{/volunteer/list}">봉사활동</a>
+                        <a th:href="@{/volunteer/review}">봉사후기</a>
+                    </div>
+                    <!-- 기준을 뭘로삼든 4개만 컨트롤러에서 뽑기 -->
+                    <div class="volunteer-section">
+                        <div class="title-box">
+                            <span>전체 봉사활동</span>
+                            <span>(※ 봉사활동 이미지나 봉사명을 클릭하면 상세정보를 확인하실 수 있습니다.)</span>
+                            <a th:if="${#authorization.expression('isAuthenticated()')} and (${member.authority} == 0 or ${member.authority} == 1)"
+                               th:href="@{/volunteer/create}" class="btn btn_link" onclick="return volunteerCreate();">등록하기</a>
+                        </div>
+                        <div class="totalList-box">
+                            <ul class="volunteer-notice-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[80px] mt-3">
+                                <li th:each="volunteer, loop : ${paging}" class="group xl:w-[300px] w-full">
+                                    <a th:href="@{|/volunteer/detail/${volunteer.id}|}" class="border border-black h-[250px] transition duration-300 rounded-lg hover:rounded-lg hover:-translate-y-1.5 hover:transition hover:duration-300 hover:shadow-md">
+                                        <img class="object-cover object-center block w-full h-full rounded-lg" th:src="@{${volunteer.thumbnailImg}}" alt="이미지가 존재하지 않습니다.">
+                                    </a>
+                                    <a th:href="@{|/volunteer/detail/${volunteer.id}|}" th:text="'봉사명 : ' + ${volunteer.title}" class="text-center md:!text-left mt-3 mb-[8px]"></a>
+                                    <a th:href="@{|/volunteer/detail/${volunteer.id}|}" th:text="'신청 마감 예정일 : ' + ${volunteer.deadLineDate}" class="text-center md:!text-left"></a>
+                                </li>
+                            </ul>
+                            <!-- 페이징 처리 시작 -->
+                            <ul th:if="${!paging.isEmpty()}" class="pagination flex justify-center mt-5">
+                                <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
+                                    <a class="page-link" th:href="@{|?page=0|}">
+                                        <span>&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="@{!paging.hasPrevious} ? 'disabled'">
+                                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
+                                        <span>&lt;</span>
+                                    </a>
+                                </li>
+                                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                                    th:classappend="${page == paging.number} ? 'active'"
+                                    class="page-item">
+                                    <a th:text="${page+1}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+                                </li>
+                                <li class="page-item" th:classappend="@{!paging.hasNext} ? 'disabled'">
+                                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+                                        <span>&gt;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${paging.number == paging.totalPages - 1} ? 'disabled'">
+                                    <a class="page-link" th:href="@{|?page=${paging.totalPages - 1}|}">
+                                        <span>&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <form th:action="@{/volunteer/list}" method="get" id="searchForm">
+                                <input type="hidden" id="page" name="page" th:value="${paging.number}">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="calendar-section">
+                        <div class="title-box">
+                            <span>전체 봉사일정</span>
+                        </div>
+                        <div id='calendar'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</section>
+</html>

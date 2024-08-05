@@ -1,0 +1,196 @@
+.container {
+    display: flex;
+}
+
+.container > .card {
+    background-color: transparent;
+    padding: 0;
+}
+
+.card {
+    height: 100%;
+}
+
+.card > .card-header {
+    height: 50%;
+    border: transparent;
+    background-color: transparent;
+}
+
+/* 좌측 프로필, 메뉴 */
+.left-box > .profile-box > .profile-img {
+    width: 270px;
+    height: 270px;
+}
+
+.left-box > .profile-box > .profile-img > img {
+    width: 100%;
+    height: 100%;
+}
+
+.left-box > .profile-box > .profile-name > span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.left-box > .menu-box-a > ul > li {
+    background-color: transparent;
+    height: 50px;
+    padding: 0;
+    border: transparent;
+}
+
+.left-box > .menu-box-a > ul > li > a {
+    border: 1.5px solid #FF416C;
+    border-radius: 10px;
+    width: 140px;
+    height: 100%;
+    text-align: center;
+    line-height: 48px;
+    box-sizing: border-box;
+}
+
+.left-box > .menu-box-a > ul > .adopt > a {
+    background-color: #FF416C;
+    color: #fff;
+}
+
+.left-box > .menu-box-a > ul > li > a:hover {
+    background-color: #FF416C;
+}
+
+.left-box > .menu-box-a > ul > li > a > span {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.left-box > .menu-box-a > ul > li > a:hover > span {
+    color: #fff;
+}
+
+/* 우측 입양내역 */
+.right-box > .title-box {
+    height: 100px;
+}
+
+.right-box > .title-box > span {
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.right-box > .content-box {
+    height: 100%;
+}
+
+.right-box > .content-box > .total-box {
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.right-box > .content-box > .total-box > span {
+    display: block;
+    height: 100%;
+    line-height: 60px;
+    font-size: 18px;
+}
+
+/* 리스트 번호 구분 */
+.right-box > .content-box > .adopt-box-title {
+    border-bottom: 1px solid #121212;
+    padding: 0;
+    height: 50px;
+}
+
+.right-box > .content-box > .adopt-box-title > ul {
+    height: 100%;
+}
+
+.right-box > .content-box > .adopt-box-title > ul > li {
+    height: 100%;
+    background-color: transparent;
+}
+
+.right-box > .content-box > .adopt-box-title > ul > li > span {
+    font-size: 16px;
+    text-align: center;
+}
+
+/* 리스트 내용 */
+.right-box > .content-box > .adopt-box-detail {
+    max-height: 450px;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.right-box > .content-box > .adopt-box-detail > ul {
+    height: 100%:
+}
+
+.right-box > .content-box > .adopt-box-detail > ul > li {
+    height: 100%;
+    background-color: transparent;
+}
+
+.right-box > .content-box > .adopt-box-detail > ul > li > span {
+    font-size: 16px;
+    text-align: center;
+}
+
+/* 반응형 시작 */
+@media (max-width: 394px) {
+    .container {
+        display: block;
+    }
+
+    /* 프로필사진, 메뉴 */
+    .container > .left-box {
+        width: 100%;
+        height: 450px !important;
+    }
+
+    .container > .left-box > .profile-box {
+        height: 280px;
+    }
+
+    .container > .left-box > .profile-box > .profile-img {
+        height: 200px;
+        width: 200px;
+    }
+
+    .container > .left-box > .menu-box-a {
+        height: 150px;
+    }
+
+    .container > .left-box > .menu-box-a > ul {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container > .left-box > .menu-box-a > ul > li {
+        width: 150px;
+    }
+
+    .container > .right-box > .content-box > .adopt-box-title > ul {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .container > .right-box > .content-box > .adopt-box-title > ul > li {
+        display: inline-block;
+        min-width: 100%;
+    }
+
+    .container > .right-box > .content-box > .adopt-box-detail > ul {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .container > .right-box > .content-box > .adopt-box-detail > ul > li {
+        display: inline-block;
+        min-width: 100%;
+    }
+}

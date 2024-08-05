@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<head>
+    <title>Q&A 상세</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resource/qa/detail.css}">
+</head>
+<body>
+<section layout:fragment="content" class="flex-1 flex flex-col items-center py-8">
+    <div class="container-all">
+        <h2 th:text="${qa.title}"></h2>
+        <p>작성자: <span th:text="${qa.member.username}"></span></p>
+        <p>작성일: <span th:text="${#temporals.format(qa.createDate, 'yyyy-MM-dd')}"></span></p>
+        <div th:text="${qa.content}"></div>
+        <div th:if="${qa.adminComment}">
+            <h3>관리자 댓글</h3>
+            <p th:text="${qa.adminComment}"></p>
+        </div>
+
+        <!-- 로그인한 사용자가 작성자인 경우에만 수정/삭제 버튼 보이기 -->
+        <div th:if="${member != null and qa.member.username == member.username}">
+            <a th:href="@{|/qa/edit/${qa.id}|}" class="button">수정</a>
+            <form th:action="@{|/qa/delete/${qa.id}|}" method="post" style="display:inline;">
+                <button type="submit" class="link-manage" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+            </form>
+        </div>
+
+        <!-- 관리자 댓글 추가 폼 -->
+        <div th:if="${member != null and member.authority == 0}">
+            <form th:action="@{|/qa/comment/${qa.id}|}" method="post">
+                <div>
+                    <label for="adminComment">관리자 댓글</label>
+                    <textarea id="adminComment" name="adminComment" rows="4" cols="50"></textarea>
+                </div>
+                <button type="submit" class="button">댓글 추가</button>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

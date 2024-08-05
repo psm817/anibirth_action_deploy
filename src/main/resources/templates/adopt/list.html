@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+  <div class="container-box">
+    <div class="adopt">
+      <div class="adopt-wrapper">
+        <div class="adopt-banner">
+          <img th:src="@{/images/banner/입양.png}" alt="배너1">
+        </div>
+      </div>
+    </div>
+    <div class="container adoptlist">
+      <h1 class="adoptnotice text-[1.5rem] font-bold">입양동물 공고</h1>
+      <div class="category-box">
+        <form th:action="@{/adopt/list}" class="category-search-form" method="get">
+          <div class="category-box-line">
+            <div class="category-type">
+              <div class="classification-category">
+                <label class="d-block">
+                  <span class="h3 d-block text-dark font-weight-semi-bold mb-0">동물구분</span>
+                  <span class="d-block text-secondary">개/고양이/기타</span>
+                </label>
+                <div class="select-box">
+                  <div class="msg-aria mb-3">
+                    <select name="classification" id="classification" data-msg="동물구분을 선택해 주세요" class="custom-select">
+                      <option value="" th:selected="${searchDTO.classification == null}">All</option>
+                      <option th:each="classification : ${classifications}"
+                              th:value="${classification.id}"
+                              th:text="${classification.name}"
+                              th:selected="${classification.id == searchDTO.classification}"></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="gender-category">
+                <label class="d-block">
+                  <span class="h3 d-block text-dark font-weight-semi-bold mb-0">성별</span>
+                  <span class="d-block text-secondary">암컷/수컷</span>
+                </label>
+                <div class="select-box">
+                  <div class="msg-aria mb-3">
+                    <select name="gender" id="gender" data-msg="성별을 선택해 주세요" class="custom-select">
+                      <option value="" th:selected="${searchDTO.gender == null}">All</option>
+                      <option th:each="gender : ${genders}"
+                              th:value="${gender.id}"
+                              th:text="${gender.name}"
+                              th:selected="${gender.id == searchDTO.gender}"></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="weight-category">
+                <label class="d-block">
+                  <span class="h3 d-block text-dark font-weight-semi-bold mb-0">크기</span>
+                  <span class="d-block text-secondary">소/중/대</span>
+                </label>
+                <div class="select-box">
+                  <div class="msg-aria mb-3">
+                    <select name="weight" id="weight" data-msg="크기를 선택해 주세요" class="custom-select">
+                      <option value="" th:selected="${searchDTO.weight == null}">All</option>
+                      <option th:each="weight : ${weights}"
+                              th:value="${weight.id}"
+                              th:text="${weight.name}"
+                              th:selected="${weight.id == searchDTO.weight}"></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="age-category">
+                <label class="d-block">
+                  <span class="h3 d-block text-dark font-weight-semi-bold mb-0">나이</span>
+                  <span class="d-block text-secondary">puppy/junior/adult/senior</span>
+                </label>
+                <div class="select-box">
+                  <div class="msg-aria mb-3">
+                    <select name="age" id="age" data-msg="나이를 선택해 주세요" class="custom-select">
+                      <option value="" th:selected="${searchDTO.age == null}">All</option>
+                      <option th:each="age : ${ages}"
+                              th:value="${age.id}"
+                              th:text="${age.name}"
+                              th:selected="${age.id == searchDTO.age}"></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="category-search-section">
+            <div class="input-group">
+              <input class="form-control" type="text" name="kw" th:value="${searchDTO.keyword}" placeholder="검색어를 입력하세요">
+            </div>
+            <div class="search-group">
+              <button type="submit" class="btn btn-sm btn-block btn-primary transition-3d-hover mb-1" style="width: 150px">검색</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <ul class="adopt-notice-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[20px] mt-3">
+        <li th:each="animal, loop : ${paging}" class="flex flex-col">
+          <a th:href="@{|/adopt/detail/${animal.id}|}"
+             class="border border-black h-[280px] transition duration-300 rounded-lg hover:rounded-lg hover:-translate-y-1.5 hover:transition hover:duration-300 hover:shadow-md">
+            <img class="block w-full h-full rounded-lg hover:rounded-lg"
+                 th:src="@{|http://www.daejeon.go.kr/${animal.filePath}|}" alt="이미지가 존재하지 않습니다.">
+          </a>
+          <a th:href="@{|/adopt/detail/${animal.id}|}" th:text="${animal.species}" class="text-center mt-2"></a>
+          <a th:href="@{|/adopt/detail/${animal.id}|}" th:text="${animal.gender}" class="text-center mt-2"></a>
+          <a th:href="@{|/adopt/detail/${animal.id}|}" th:text="${animal.age}" class="text-center mt-2"></a>
+        </li>
+      </ul>
+      <!-- 페이징 처리 시작 -->
+      <ul th:if="${!paging.isEmpty()}" class="pagination flex justify-center my-5 ">
+        <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+          <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
+            <span>&lt;</span>
+          </a>
+        </li>
+
+        <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
+            th:if="${page >= paging.number-5 and page <= paging.number+5}"
+            th:classappend="${page == paging.number} ? 'active'"
+            class="page-item">
+          <a th:text="${page+1}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+        </li>
+
+        <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+          <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+            <span>&gt;</span>
+          </a>
+        </li>
+      </ul>
+      <form th:action="@{/adopt/list}" method="get" id="searchForm">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
+        <input type="hidden" id="page" name="page" th:value="${paging.number}">
+      </form>
+    </div>
+  </div>
+  <script layout:frgment="script" type="text/javascript">
+    $(document).ready(function() {
+     // .page-link 클래스를 가진 모든 요소에 클릭 이벤트 리스너 추가
+     $('.page-link').on('click', function() {
+         $('#page').val($(this).data('page')); // 클릭된 요소의 data-page 값을 page 입력 요소에 설정
+         $('#searchForm').submit(); // searchForm 폼 제출
+     });
+
+     // btn_search 요소에 클릭 이벤트 리스너 추가
+     $('#btn_search').on('click', function() {
+         $('#kw').val($('#search_kw').val()); // search_kw 입력 요소의 값을 kw 입력 요소에 설정
+         $('#page').val(0); // 페이지 값을 0으로 설정하여 첫 페이지부터 조회하도록 함
+         $('#searchForm').submit(); // searchForm 폼 제출
+     });
+ });
+  </script>
+</section>
+</html>

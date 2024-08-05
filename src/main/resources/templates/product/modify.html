@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="section-prod-list">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                상품 수정
+            </div>
+            <div class="card-body">
+                <form th:action="@{|/product/modify/${product.id}|}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">상품명</label>
+                        <input type="text" id="title" name="title" class="form-control" th:value="${product.title}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">상품설명</label>
+                        <textarea id="description" name="description" class="form-control" rows="5" required th:text="${product.description}"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">판매가</label>
+                        <input type="number" id="price" name="price" class="form-control" th:value="${product.price}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="thumbnail" class="form-label">썸네일 이미지</label>
+                        <input type="file" id="thumbnail" name="thumbnail" class="form-control">
+                        <small class="form-text text-muted">이미지를 변경하려면 파일을 선택하세요.</small>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">수정하기</button>
+                        <a th:href="@{|/product/detail/${product.id}|}" class="btn btn-secondary">취소</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>애니버스</title>
+
+    <!-- 파비콘 -->
+    <link rel="icon" href="/images/favicon_logo.ico">
+
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <!-- 테일윈드-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+
+    <!-- 폰트어썸 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Swiper JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- 풀캘린더 -->
+    <link href='fullcalendar-5.11.3/lib/main.css' rel='stylesheet' />
+    <script src='fullcalendar-5.11.3/lib/main.js'></script>
+
+    <!-- 카카오맵  -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eb056411ed0a231b5b69be2ae06e1f04&libraries=services"></script>
+    <!-- 다음 주소검색 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <!-- 커스텀 css모음 -->
+    <link href="/resource/common/common.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/home/main.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/signup.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/myPage/myProfile.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/myPage/volunteer.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/myPage/adopt.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/myPage/donation.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/myPage/market.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/modify.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/member/social_modify.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/adopt/list.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/adopt/apply.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/adopt/detail.css" rel="stylesheet" type="text/css"/>
+    <link href="/resource/donation/donationPage.css" rel="stylesheet">
+    <link href="/resource/volunteer/list.css" rel="stylesheet">
+    <link href="/resource/volunteer/create.css" rel="stylesheet">
+    <link href="/resource/volunteer/detail.css" rel="stylesheet">
+    <link href="/resource/volunteer/modify.css" rel="stylesheet">
+    <link href="/resource/volunteer/review.css" rel="stylesheet">
+    <link href="/resource/volunteer/reviewCreate.css" rel="stylesheet">
+    <link href="/resource/volunteer/reviewDetail.css" rel="stylesheet">
+
+
+    <!-- 커스텀 js모음 -->
+    <script defer src="/javascript/home/main.js"></script>
+    <script defer src="/javascript/member/signup.js"></script>
+    <script defer src="/javascript/member/myPage/myProfile.js"></script>
+    <script defer src="/javascript/member/modify.js"></script>
+    <script defer src="/javascript/member/social_modify.js"></script>
+    <script src="https://js.tosspayments.com/v1"></script>
+    <script src="/donation/donationscript.js"></script>
+    <script src="/javascript/volunteer/list.js"></script>
+    <script src="/javascript/volunteer/create.js"></script>
+    <script src="/javascript/volunteer/detail.js"></script>
+    <script src="/javascript/volunteer/reviewCreate.js"></script>
+    <script src="/javascript/adopt/zipcode.js"></script>
+    <script src="/javascript/common/common.js"></script>
+
+
+
+</head>
+
+<body class="flex flex-col min-h-screen pt-[56px]">
+<!-- common.css -->
+
+
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-[#FF416C]">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mb-2 mb-md-0 ml-[auto] mr-[190px]">
+                    <li class="nav-item flex items-center text-white mr-[40px]">
+                        <span sec:authorize="isAuthenticated()" th:text="${#strings.startsWith(#authentication.name, 'NAVER') ? #authentication.name.substring(0, 20) : #authentication.name} + '님'"></span>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/myPage/myProfile}">마이페이지</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" href="#">장바구니</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a>
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
+                    </li>
+                    <li class="nav-item text-left">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/agreement}">회원가입</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="menu-bar container">
+        <div class="logo-box">
+            <a href="/">
+                <img th:src="@{/images/logo/logo.png}" alt="로고이미지">
+            </a>
+        </div>
+        <div class="menu-box mb-[5px]">
+            <ul class="menu-title">
+                <li class="menu-text">
+                    <a href="#">
+                        <span>애니버스</span>
+                    </a>
+                </li>
+                <li class="menu-text">
+                    <a th:href="@{/volunteer/list}">
+                        <span>봉사활동</span>
+                    </a>
+                </li>
+                <li class="menu-text">
+                    <a th:href="@{/adopt/list}">
+                        <span>입양하기</span>
+                    </a>
+                </li>
+                <li class="menu-text">
+                    <a th:href="@{/donation/donate}">
+                        <span>후원하기</span>
+                    </a>
+                </li>
+                <li class="menu-text">
+                    <a th:href="@{/product/main}">
+                        <span>애니마켓</span>
+                    </a>
+                </li>
+                <li class="menu-text">
+                    <a th:href="@{/article/list}">
+                        <span>애니공지</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<section class="flex-1 flex flex-col">
+    <!-- Content Start -->
+    <th:block layout:fragment="content"></th:block>
+    <!-- Content End -->
+</section>
+
+<footer class="footer py-3 bg-light">
+    <div class="container text-center flex justify-center">
+        <span class="text-muted">상호명 : 애니버스</span><br>
+        <span class="text-muted">공동 개발자 : 김지영, 김태우, 박상민, 박현철</span>
+    </div>
+</footer>
+
+</body>
+</html>

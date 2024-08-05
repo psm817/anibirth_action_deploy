@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center mt-8">
+    <div class="container" style="display: flex; flex-wrap: wrap;">
+        <div class="w-full text-center mb-8">
+            <img th:src="@{/images/banner/banner-1.png}" alt="배너1" class="mx-auto">
+            <h2 class="text-xl font-bold mt-4">#여름템 #기획전</h2>
+        </div>
+
+        <h2 class="w-full text-center text-2xl font-bold mb-4">BEST</h2>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3">
+            <li th:each="product, loop : ${paging}" class="flex flex-col group xl:w-[300px] w-full">
+                <a th:href="@{|/product/detail/${product.id}|}"
+                   class="border border-black h-[250px] transition duration-300 rounded-lg hover:rounded-lg hover:-translate-y-1.5 hover:transition hover:duration-300 hover:shadow-md"
+                >
+                    <img class="object-cover object-center block w-full h-full rounded-lg" th:src="@{|/gen/${product.thumbnailImg}|}" alt="이미지가 존재하지 않습니다.">
+                </a>
+                <a th:href="@{|/product/detail/${product.id}|}" th:text="${product.title}" class="text-center md:!text-left mt-2"></a>
+                <a th:href="@{|/product/detail/${product.id}|}" th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}" class="text-center md:!text-left"></a>
+            </li>
+        </ul>
+
+        <div th:if="${member != null and (member.authority == 0 or member.authority == 1)}" class="mt-7 text-right">
+            <a th:href="@{/product/create}" class="button">등록하기</a>
+        </div>
+
+        <!-- 페이징 처리 시작 -->
+        <ul th:if="${!paging.isEmpty()}" class="pagination flex justify-center mt-5">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
+                    <span>&lt;</span>
+                </a>
+            </li>
+
+            <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item"
+            >
+                <a th:text="${page+1}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+                    <span>&gt;</span>
+                </a>
+            </li>
+        </ul>
+        <form th:action="@{/product/list}" method="get" id="searchForm">
+            <input type="hidden" id="kw" name="kw" th:value="${kw}">
+            <input type="hidden" id="page" name="page" th:value="${paging.number}">
+        </form>
+    </div>
+    <script layout:fragment="script" type="text/javascript">
+        $(document).ready(function () {
+            $(".page-link").on("click", function () {
+                $("#page").val($(this).data("page"));
+                $("#searchForm").submit();
+            });
+
+            $("#btn_search").on("click", function () {
+                $("#kw").val($("#search_kw").val());
+                $("#page").val(0);
+                $("#searchForm").submit();
+            });
+        });
+    </script>
+</section>
+</html>

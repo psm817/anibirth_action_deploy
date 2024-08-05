@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<head>
+    <title>Q&A 등록</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resource/qa/form.css}">
+</head>
+<body>
+<section layout:fragment="content" class="flex-1 flex flex-col items-center py-8">
+    <div class="container-all">
+        <h2>Q&A 등록</h2>
+        <form th:action="@{/qa/create}" method="post">
+            <div>
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" th:value="${qa.title}" required>
+            </div>
+            <div>
+                <label for="content">내용</label>
+                <textarea id="content" name="content" rows="10" cols="50" th:text="${qa.content}" required></textarea>
+            </div>
+            <button type="submit" class="button">등록</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

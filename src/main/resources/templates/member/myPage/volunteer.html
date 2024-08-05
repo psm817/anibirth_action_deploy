@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <div class="container h-full">
+        <div class="left-box card w-[500px]">
+            <div class="profile-box card-header flex flex-col items-center">
+                <div class="profile-img mt-[10px]">
+                    <img th:src="@{${member.thumbnailImg}}" alt="프로필사진">
+                </div>
+                <div class="profile-name mt-[15px]">
+                    <span th:text="${member.nickname}"></span>
+                </div>
+            </div>
+            <div class="menu-box-v card-header">
+                <ul class="list-group list-group-flush gap-6 mt-2">
+                    <li th:if="${member.authority} != 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>마이프로필</span></a>
+                    </li>
+                    <li th:if="${member.authority} == 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>회원목록</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center volunteer">
+                        <a th:href="@{/member/myPage/volunteer}"><span>봉사내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center adopt">
+                        <a th:href="@{/member/myPage/adopt}"><span>입양내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center donation">
+                        <a th:href="@{/member/myPage/donation}"><span>후원 및 마켓내역</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-box card w-[100%] ">
+            <div class="title-box card-header flex items-center pl-[40px]">
+                <span>봉사내역</span>
+            </div>
+            <div class="content-box card-header pl-[40px]">
+                <div class="total-box">
+                    <span th:if="${member.authority} == 2" th:text="${member.nickname} + '님이 참여하신 봉사활동은 총 0 건입니다.'"></span>
+                    <span th:if="${member.authority} == 1" th:text="${member.nickname} + '님이 등록하신 봉사활동은 총 0 건입니다.'"></span>
+                    <span th:if="${member.authority} == 0" th:text="'애니버스에 등록된 봉사활동은 총 0건입니다.'"></span>
+                </div>
+                <!-- 일반 회원일때 리스트 항목 -->
+                <div class="volunteer-box-title card-body" th:if="${member.authority} == 2">
+                    <ul class="list-group list-group-flush gap-6">
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">번호</span>
+                            <span class="date w-[35%]">봉사기간</span>
+                            <span class="volunteer-name w-[55%]">봉사명</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 최고/중간 관리자일때 리스트 항목 -->
+                <div class="volunteer-box-title card-body" th:if="${member.authority} == 1 or ${member.authority} == 0">
+                    <ul class="list-group list-group-flush gap-6">
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">번호</span>
+                            <span class="start-date w-[20%]">등록날짜</span>
+                            <span class="end-date w-[20%]">등록마감날짜</span>
+                            <span class="volunteer-name w-[20%]">봉사명</span>
+                            <span class="num w-[15%]">신청인원</span>
+                            <span class="maxNum w-[15%]">최대인원</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 일반 회원일때 리스트 내용 -->
+                <div th:if="${member.authority} == 2" class="volunteer-box-detail card-body">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">1</span>
+                            <span class="date w-[35%]">2024-07-22 ~ 2024-07-22</span>
+                            <span class="volunteer-name w-[55%]">유기견 목욕시키기</span>
+                        </li>
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">2</span>
+                            <span class="date w-[35%]">2024-07-22 ~ 2024-07-22</span>
+                            <span class="volunteer-name w-[55%]">유기견 목욕시키기</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 최고 관리자일때 리스트 항목 -->
+                <div th:if="${member.authority} == 0" class="volunteer-box-detail card-body">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">1</span>
+                            <span class="start-date w-[20%]">2024-07-22</span>
+                            <span class="end-date w-[20%]">2024-07-22</span>
+                            <span class="volunteer-name w-[20%]">유기견 목욕시키기</span>
+                            <span class="num w-[15%]">15</span>
+                            <span class="maxNum w-[15%]">20</span>
+                        </li>
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">2</span>
+                            <span class="start-date w-[20%]">2024-07-22</span>
+                            <span class="end-date w-[20%]">2024-07-22</span>
+                            <span class="volunteer-name w-[20%]">유기견 목욕시키기</span>
+                            <span class="num w-[15%]">8</span>
+                            <span class="maxNum w-[15%]">20</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 중간 관리자일때 리스트 항목 -->
+                <div th:if="${member.authority} == 1" class="volunteer-box-detail card-body">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">1</span>
+                            <span class="start-date w-[20%]">2024-07-22</span>
+                            <span class="end-date w-[20%]">2024-07-22</span>
+                            <span class="volunteer-name w-[20%]">유기견 목욕시키기</span>
+                            <span class="num w-[15%]">15</span>
+                            <span class="maxNum w-[15%]">20</span>
+                        </li>
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">2</span>
+                            <span class="start-date w-[20%]">2024-07-22</span>
+                            <span class="end-date w-[20%]">2024-07-22</span>
+                            <span class="volunteer-name w-[20%]">유기견 목욕시키기</span>
+                            <span class="num w-[15%]">8</span>
+                            <span class="maxNum w-[15%]">20</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

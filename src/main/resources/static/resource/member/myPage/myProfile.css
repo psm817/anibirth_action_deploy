@@ -1,0 +1,256 @@
+.container {
+    display: flex;
+}
+
+.container > .card {
+    background-color: transparent;
+    padding: 0;
+}
+
+.card {
+    height: 100%;
+}
+
+.card > .card-header {
+    height: 50%;
+    border: transparent;
+    background-color: transparent;
+}
+
+/* 좌측 프로필, 메뉴 */
+.left-box > .profile-box > .profile-img {
+    width: 270px;
+    height: 270px;
+}
+
+.left-box > .profile-box > .profile-img > img {
+    width: 100%;
+    height: 100%;
+}
+
+.left-box > .profile-box > .profile-name > span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.left-box > .menu-box-t > ul > li {
+    background-color: transparent;
+    height: 50px;
+    padding: 0;
+    border: transparent;
+}
+
+.left-box > .menu-box-t > ul > li > a {
+    border: 1.5px solid #FF416C;
+    border-radius: 10px;
+    width: 140px;
+    height: 100%;
+    text-align: center;
+    line-height: 48px;
+    box-sizing: border-box;
+}
+
+.left-box > .menu-box-t > ul > .profile > a {
+    background-color: #FF416C;
+    color: #fff;
+}
+
+.left-box > .menu-box-t > ul > li > a:hover {
+    background-color: #FF416C;
+}
+
+.left-box > .menu-box-t > ul > li > a > span {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.left-box > .menu-box-t > ul > li > a:hover > span {
+    color: #fff;
+}
+
+/* 우측 프로필 정보 */
+.right-box > .title-box {
+    height: 100px;
+    padding-left: 40px;
+}
+
+.right-box > .title-box > span {
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.right-box > .content-box {
+    height: 100%;
+    padding-left: 40px;
+}
+
+.right-box > .content-box > ul > li {
+    background-color: transparent;
+    height: 50px;
+    padding: 0;
+    border: transparent;
+}
+
+.right-box > .content-box > ul > li > span {
+    font-weight: 700;
+    font-size: 18px;
+    width: 100px;
+    margin-right: 70px;
+    text-align: left;
+}
+
+.right-box > .content-box > ul > li > .text-box {
+    border: 1px solid #808080;
+    border-radius: 10px;
+    height: 100%;
+    width: 450px;
+}
+
+.right-box > .content-box > ul > li > .text-box > span {
+    padding-left: 10px;
+    font-size: 17px;
+}
+
+.right-box > .content-box > ul > li > .charge-box {
+    height: 100%;
+    width: 100px;
+    background-color: #FF416C;
+    border-radius: 10px;
+}
+
+.right-box > .content-box > ul > li > .charge-box > a {
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    height: 100%;
+    text-align: center;
+    line-height: 49.37px;
+}
+
+/* 수정, 탈퇴 버튼 */
+.right-box > .content-box > .btn-box > a {
+    border: 1px solid #808080;
+    border-radius: 10px;
+    padding: 7px 15px 7px 15px;
+}
+
+.right-box > .content-box > .btn-box > a:hover {
+    color: #fff;
+    background-color: #FF416C;
+}
+
+/* 반응형 시작 */
+@media (max-width: 394px) {
+    .container {
+        display: block;
+    }
+
+    /* 프로필사진, 메뉴 */
+    .container > .left-box {
+        width: 100%;
+        height: 450px !important;
+    }
+
+    .container > .left-box > .profile-box {
+        height: 280px;
+    }
+
+    .container > .left-box > .profile-box > .profile-img {
+        height: 200px;
+        width: 200px;
+    }
+
+    .container > .left-box > .menu-box-t {
+        height: 150px;
+    }
+
+    .container > .left-box > .menu-box-t > ul {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container > .left-box > .menu-box-t > ul > li {
+        width: 150px;
+    }
+
+    .container > .right-box {
+        height: 700px !important;
+    }
+
+    /* 중간/일반회원일 때 프로필 정보 */
+    .container > .right-box > .title-box {
+        padding-left: 5px !important;
+    }
+
+    .container > .right-box > .title-box > span {
+        font-size: 20px;
+    }
+
+    .container > .right-box > .content-box {
+        padding-left: 5px !important;
+    }
+
+    .container > .right-box > .content-box > ul > li {
+        height: 50px;
+    }
+
+    .container > .right-box > .content-box > ul > li > span {
+        font-size: 15px;
+        width: 200px;
+        margin-right: 0px !important;
+    }
+
+    .container > .right-box > .content-box > ul > li > .text-box {
+        overflow: auto;
+        height: 80%;
+    }
+
+    .container > .right-box > .content-box > ul > li > .text-box > span {
+        word-wrap: break-word; /* 단어가 너무 길 경우 줄 바꿈을 할 수 있도록 추가 */
+        font-size: 15px;
+    }
+
+    .container > .right-box > .content-box > ul > li > .authority-box {
+        width: 340px;
+    }
+
+    .container > .right-box > .content-box > ul > li > .charge-box {
+        margin-left: 5px;
+        padding: -5px 5px -5px 5px;
+    }
+
+    .container > .right-box > .content-box > ul > li > .charge-box > a {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    /* 최고관리자일 때 회원목록 */
+    .container > .right-box > .content-box > .total-box > span {
+        font-size: 16px;
+    }
+
+    .container > .right-box > .content-box > .volunteer-box-title > ul {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .container > .right-box > .content-box > .volunteer-box-title > ul > li {
+        display: inline-block;
+        min-width: 100%;
+    }
+
+    .container > .right-box > .content-box > .volunteer-box-detail > ul {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .container > .right-box > .content-box > .volunteer-box-detail > ul > li {
+        display: inline-block;
+        min-width: 100%;
+    }
+}

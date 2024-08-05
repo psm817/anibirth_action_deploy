@@ -1,0 +1,255 @@
+.main-container-box {
+  width: 100%;
+  height: 100%;
+}
+
+.main-container-box > .volunteer-review {
+  width: 100%;
+  height: 100%;
+}
+
+.main-container-box > .volunteer-review > .volunteer-wrapper {
+  width: 100%;
+  height: 380px;
+}
+
+.main-container-box > .volunteer-review > .volunteer-wrapper > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-overlay-vr {
+    position: absolute;
+    top: 32%;
+    left: 180px;
+    width: 900px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.text-overlay-vr h1 {
+    margin-right: auto;
+    font-size: 3em;
+}
+
+.text-overlay-vr p {
+    margin: 0;
+    font-size: 1.2em;
+    text-align: left;
+    max-width: 80%;
+}
+
+.review-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* 소메뉴 */
+.review-box > .tiny-menu-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.review-box > .tiny-menu-box > a {
+    cursor: pointer;
+    padding: 10px;
+    display: block;
+    font-size: 18px;
+}
+
+.review-box > .tiny-menu-box > a:nth-child(2) {
+    font-weight: 700;
+    color: #FF416C;
+}
+
+.review-box > .tiny-menu-box > a:hover {
+    color: #FF416C;
+}
+
+/* 봉사 리스트 */
+.review-box > .review-section {
+    height: 100%;
+}
+
+.review-box > .review-section > .title-box {
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.review-box > .review-section > .title-box > span {
+    font-weight: 700;
+    font-size: 23px;
+    margin-left: 35px;
+}
+
+.review-box > .review-section > .title-box > a {
+    border: 2px solid #FF416C;
+    background-color: #FF416C;
+    color: #fff;
+    border-radius: 10px;
+    margin-left: 15px;
+}
+
+.review-box > .review-section > .title-box > a:hover {
+    background-color: transparent;
+    color: #121212;
+}
+
+.review-box > .review-section > .title-box > span:nth-child(2) {
+    font-weight: 500;
+    font-size: 15px;
+    margin-left: 15px;
+}
+
+.review-box > .review-section > .totalList-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list {
+    width: 100%;
+    margin-bottom: 16px;
+    height: 100%;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list  > li {
+    height: 250px;
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .left-image-box {
+    width: 250px;
+    height: 100%;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .left-image-box > a {
+    width: 100%;
+    height: 100%;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .left-image-box > a > img {
+    width: 100%;
+    height: 100%;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .right-detail-box {
+    padding-left: 30px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .right-detail-box > span {
+    font-size: 14px;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .right-detail-box > span:nth-child(4) {
+    margin-bottom: 20px;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .right-detail-box > a {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.review-box > .review-section > .totalList-box > .review-notice-list > li > .right-detail-box > a > span {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.review-box > .review-section > .totalList-box > .pagination {
+    margin-bottom: 30px;
+}
+
+/* 반응형 시작 */
+@media (max-width: 394px) {
+    .text-overlay-vr {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        padding: 26px;
+        margin-top: 130px;
+    }
+    .text-overlay-vr h1 {
+        font-size: 2.0em;
+    }
+    .text-overlay-vr p {
+        font-size: 0.9em;
+    }
+
+    .review-box > .review-section > .title-box {
+        margin-top: 15px;
+        height: 110px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .review-box > .review-section > .title-box > span {
+        font-weight: 700;
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .review-box > .review-section > .title-box > span {
+        font-weight: 700;
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .review-box > .review-section > .title-box > span:nth-child(2) {
+        font-weight: 500;
+        font-size: 13px;
+        margin-left: 10px;
+        text-align: left;
+    }
+
+    .review-box > .review-section > .title-box > a {
+        margin-left: 10px;
+        margin-top: 5px;
+        font-size: 15px;
+    }
+
+    .review-box > .review-section > .title-box > a:hover {
+        background-color: transparent;
+        color: #121212;
+    }
+
+    .review-box > .review-section > .totalList-box {
+        margin-top: 5px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .review-box > .review-section > .totalList-box > .review-notice-list > li {
+        flex-direction: column;
+        height: 350px;
+    }
+
+    .review-box > .review-section > .totalList-box > .review-notice-list > li > .left-image-box {
+        width: 100%;
+        height: 200px;
+    }
+
+    .review-box > .review-section > .totalList-box > .review-notice-list > li > .right-detail-box {
+        width: 100%;
+        padding-left: 10px;
+    }
+}

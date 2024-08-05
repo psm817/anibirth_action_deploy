@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 justify-center items-center">
+    <div class="container signup-box">
+        <div class="cardM-img w-[1000px]">
+            <div class="img-box">
+                <img src="https://i.namu.wiki/i/abZPxKt_L98I8ttqw56pLHtGiR5pAV4YYmpR3Ny3_n0yvff5IDoKEQFof7EbzJUSZ_-uzR5S7tzTzGQ346Qixw.webp" alt="">
+            </div>
+        </div>
+        <div class="card w-[100%]">
+            <div class="signup-form flex flex-col">
+                <div class="title-box">
+                    <h1>프로필수정</h1>
+                </div>
+                <div class="modify-box">
+                    <form th:action="@{|/member/modify/${member.id}|}" method="POST" onsubmit="submitModifyForm(this); return false;" enctype="multipart/form-data">
+                        <div class="type-box id-box">
+                            <span class="font-weight mr-[110px]">ID
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input type="text" id="username" maxlength="20" name="username" th:placeholder="${member.username}" th:disabled="true">
+                        </div>
+                            <div class="type-box password-box">
+                            <span class="mr-[110px]">비밀번호
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input type="password" id="password" name="password" maxlength="20" placeholder="비밀번호를 입력하세요." oninput="checkPasswords()">
+                        </div>
+                        <div class="type-box password-confirm-box">
+                            <span class="mr-[110px]">비밀번호 확인
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input type="password" id="password_confirm" name="password_confirm" maxlength="20" placeholder="비밀번호를 한번 더 입력하세요." oninput="checkPasswords()">
+                        </div>
+                        <div class="type-box authority-box">
+                            <span class="mr-[110px]">권한
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <select id="authority" class="form-select" name="authority" aria-label="Default select example" disabled="true">
+                                <option value="" disabled selected hidden th:if="${member.authority} == 1" th:text="'보호소/기업'"></option>
+                                <option value="" disabled selected hidden th:if="${member.authority} == 2" th:text="'일반회원'"></option>
+                            </select>
+                        </div>
+                        <div class="type-box nickname-box">
+                            <span class="mr-[110px]">활동명
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input type="text" name="nickname" placeholder="닉네임을 입력하세요.">
+                        </div>
+                        <div class="type-box email-box">
+                            <span class="mr-[110px]">이메일
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input type="email" name="email" placeholder="이메일을 입력하세요.">
+                        </div>
+                        <div class="type-box phone-box">
+                            <span class="mr-[110px]">전화번호
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input type="text" name="phone" placeholder="전화번호를 입력하세요. (- 포함)">
+                        </div>
+                        <div class="type-box address-box">
+                            <span class="mr-[110px]">주소
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input type="text" name="address" placeholder="주소지를 입력하세요.">
+                        </div>
+                        <div class="type-box profile-picture-box">
+                            <span class="mr-[100px]">프로필 사진
+                                <span class="text-red-600">*</span>
+                            </span>
+                            <input class="file-box" type="file" name="thumbnailImg">
+                        </div>
+                        <div class="type-box signup-btn flex justify-center">
+                            <button class="btn btn-primary cancel" type="button" onclick="if(confirm('프로필 수정을 취소하시겠습니까?')) { window.location.href='/'; }">취소</button>
+                            <button type="submit" class="btn btn-primary check" onclick="confirm('프로필 수정을 진행하시겠습니까? \n프로필 수정이 완료되면 재로그인이 필요합니다.');" id="submitButton">수정</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

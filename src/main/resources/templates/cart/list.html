@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="section-cart-item-list">
+    <div class="container">
+        <h1 class="text-[1.5rem] font-bold flex justify-center pt-5 pb-5">장바구니</h1>
+
+        <div class="mt-10">
+            <table class="table table-hover">
+                <colgroup>
+                    <col style="width: 50px;">
+                    <col style="width: 300px;">
+                    <col style="width: 600px;">
+                    <col style="width: 300px;">
+                </colgroup>
+
+                <thead>
+                    <tr class="align-middle whitespace-nowrap">
+                        <th><input type="checkbox" class="form-1__checkbox-all"></th>
+                        <th>이미지</th>
+                        <th>상품명</th>
+                        <th>가격</th>
+                        <th class="!px-[20px]">구매/삭제</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cartItem : ${cartList}" class="align-middle whitespace-nowrap">
+                        <td><input type="checkbox" class="form-1__checkbox-item"></td>
+                        <td>
+                            <a th:href="@{|/product/detail/${cartItem.product.id}|}"><img class="w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] object-cover" src="https://i.imgur.com/PVsCFy1.png" alt="상품이미지"></a>
+                        </td>
+                        <td>
+                            <a th:href="@{|/product/detail/${cartItem.product.id}|}" th:text="${cartItem.product.title}" th:attr="data-title=${cartItem.product.title}"></a>
+                        </td>
+                        <td th:text="${#numbers.formatInteger(cartItem.product.price, 3, 'COMMA') + '원'}" th:attr="data-price=${cartItem.product.price}"></td>
+                        <td>
+                            <a href="#" type="button" class="btn btn-link">삭제</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <span class="text-[1.1rem] font-bold">총 가격</span>
+                <span id="total-price">0 원</span>
+                <button class="btn btn-outline-dark btn-purchase">결제하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://js.tosspayments.com/v1"></script>
+    <script th:inline="javascript">
+        <!-- 체크박스 전체 클릭 -->
+        $('.form-1__checkbox-all').change(function() {
+            if ( this.checked ) {
+                $('.form-1__checkbox-item:not(:checked)').prop('checked', true);
+            } else {
+                $('.form-1__checkbox-item').prop('checked', false);
+            }
+
+            calculateTotal();
+        });
+
+        $('.form-1__checkbox-item').change(function() {
+            calculateTotal();
+
+            let allChecked = $('.form-1__checkbox-item:not(:checked)').length == 0;
+            $('.form-1__checkbox-all').prop('checked', allChecked);
+        });
+
+        <!-- 총 합 계산 -->
+        function calculateTotal() {
+            let titles = [];
+            let price = 0;
+
+            $('.form-1__checkbox-item:checked').each(function() {
+                let $row = $(this).closest('tr');
+                let dataTitle = $row.find('[data-title]').data('title');
+                let dataPrice = parseFloat($row.find('[data-price]').data('price'));
+
+                titles.push(dataTitle);
+                price += parseFloat(dataPrice);
+            });
+
+            price = Math.round(price);
+
+            if (price > 0) {
+                $('#total-price').text('총합: ' + price.toLocaleString() + ' 원');
+            } else {
+                $('#total-price').text(' 0원');
+            }
+
+            price = Math.round(price);
+            let titlesString = titles.join(", ");
+
+            return {titlesString, price};
+        }
+
+        <!-- 구매 버튼 클릭 -->
+        $('.btn-purchase').on('click', function(e) {
+            e.preventDefault();
+            let result = calculateTotal();
+            pay(result.titlesString, result.price);
+        });
+
+
+        <!-- 토스페이먼츠 -->
+        let tossPayments = TossPayments("test_ck_GePWvyJnrKRdgMBO61D1VgLzN97E"); // 테스트 클라이언트 키
+
+        let path = "/order/";
+        let successUrl = window.location.origin + path + "success";
+        let failUrl = window.location.origin + path + "fail";
+        let callbackUrl = window.location.origin + path + "va_callback";
+        let orderId = new Date().getTime();
+
+        function pay(title, price) {
+
+            if (price == 0) { alert('상품을 선택해주세요'); }
+            const method = "카드";
+
+            const requestJson = {
+                amount: price,
+                orderId: "sample-" + orderId,
+                orderName: title,
+                successUrl: successUrl,
+                failUrl: failUrl,
+                cardCompany: null,
+                cardInstallmentPlan: null,
+                maxCardInstallmentPlan: null,
+                useCardPoint: false,
+                customerName: "박토스",
+                customerEmail: null,
+                customerMobilePhone: null,
+                taxFreeAmount: null,
+                useInternationalCardOnly: false,
+                flowMode: "DEFAULT",
+                discountCode: null,
+                appScheme: null,
+            }
+
+            tossPayments.requestPayment(method, requestJson)
+        }
+    </script>
+
+
+</section>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="section-prod-list">
+    <style>
+        /* Add the CSS code for the rating stars here */
+        .rating:not(:checked) > input {
+            position: absolute;
+            appearance: none;
+        }
+
+        .rating:not(:checked) > label {
+            float: right;
+            cursor: pointer;
+            font-size: 30px;
+            color: #666;
+        }
+
+        .rating:not(:checked) > label:before {
+            content: '★';
+        }
+
+        .rating > input:checked + label:hover,
+        .rating > input:checked + label:hover ~ label,
+        .rating > input:checked ~ label:hover,
+        .rating > input:checked ~ label:hover ~ label,
+        .rating > label:hover ~ input:checked ~ label {
+            color: #e58e09;
+        }
+
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: #ff9e0b;
+        }
+
+        .rating > input:checked ~ label {
+            color: #ffa723;
+        }
+    </style>
+    <div class="col-md-8 container-box" style="display: flex; flex-wrap: nowrap;">
+        <div class="col-md-4 img-container">
+            <img class="product-img" th:src="@{|/gen/${product.thumbnailImg}|}" alt="이미지가 존재하지 않습니다.">
+        </div>
+        <div class="card">
+            <div class="card-header">
+                상품상세정보
+            </div>
+
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush gap-2 mt-3">
+                    <li class="list-group-item">
+                        <span>번호:</span>
+                        <span th:text="${product.id}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span>등록날짜:</span>
+                        <span th:text="${#temporals.format(product.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span>상품명:</span>
+                        <span class="font-bold" th:text="${product.title}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span>판매가:</span>
+                        <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}"></span>
+                    </li>
+                </ul>
+                <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{|/product/modify/${product.id}|}"
+                       th:if="${product.member != null and #authentication != null and (product.member.username == #authentication.getName() or member.authority == 0)}">
+                        수정
+                    </a>
+                    <a th:href="@{|/product/delete/${product.id}|}"
+                       onclick="return confirm('정말 삭제하시겠습니까?')"
+                       th:if="${product.member != null and #authentication != null and (product.member.username == #authentication.getName() or member.authority == 0)}">
+                        삭제
+                    </a>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                장바구니
+            </div>
+
+            <div class="card-body">
+                <form th:action="@{|/cart/add/${product.id}|}" method="POST">
+                    <input type="submit" value="장바구니" class="btn btn-outline-dark">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 container-box">
+        <div class="card">
+            <li class="list-group-item">
+                <span>상품설명:</span>
+                <span th:text="${product.description}"></span>
+            </li>
+            <div class="card-header">
+                리뷰 등록
+            </div>
+
+            <div class="card-body">
+                <form sec:authorize="isAuthenticated()" th:action="@{|/review/create/${product.id}|}" method="POST">
+                    <div class="mt-3">
+                        <div class="mb-3">
+                            <label for="content" class="form-label">내용</label>
+                            <textarea name="content" id="content" class="form-control" rows="7"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="starRating" class="form-label">별점</label>
+                            <div class="rating">
+                                <input value="5" name="starRating" id="star5" type="radio">
+                                <label title="5 stars" for="star5"></label>
+                                <input value="4" name="starRating" id="star4" type="radio">
+                                <label title="4 stars" for="star4"></label>
+                                <input value="3" name="starRating" id="star3" type="radio">
+                                <label title="3 stars" for="star3"></label>
+                                <input value="2" name="starRating" id="star2" type="radio">
+                                <label title="2 stars" for="star2"></label>
+                                <input value="1" name="starRating" id="star1" type="radio">
+                                <label title="1 star" for="star1"></label>
+                            </div>
+                        </div>
+                        <input type="submit" value="등록하기" class="btn btn-dark">
+                    </div>
+                </form>
+                <div sec:authorize="isAnonymous()">
+                    <a th:href="@{/member/login}">로그인</a> 후 이용해주세요.
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                리뷰
+            </div>
+
+            <ul th:if="${#lists.size(product.reviewList) > 0}" class="list-group list-group-flush gap-2 card-body">
+                <li th:each="review : ${product.reviewList}" class="list-group-item">
+                    <span th:text="${review.id}" class="mr-2"></span>
+                    <span th:text="${review.content}"></span>
+
+                    <a
+                            th:href="@{|/review/modify/${review.id}|}"
+                            class="btn btn-sm btn-link"
+                            sec:authorize="isAuthenticated()"
+                            th:if="${review.member != null and #authentication.getPrincipal().getUsername() == review.member.username}"
+                    >
+                        수정
+                    </a>
+                    <a
+                            th:href="@{|/review/delete/${review.id}|}"
+                            class="btn btn-sm btn-link"
+                            onclick="if ( confirm('정말 삭제하시겠습니까?' ) == false ) return false;"
+                            sec:authorize="isAuthenticated()"
+                            th:if="${review.member != null and #authentication.getPrincipal().getUsername() == review.member.username}"
+                    >
+                        삭제
+                    </a>
+                </li>
+            </ul>
+            <ul th:unless="${#lists.size(product.reviewList) > 0}" class="card-body">
+                <div>
+                    리뷰가 아직 없습니다.
+                </div>
+            </ul>
+        </div>
+    </div>
+</section>
+</html>

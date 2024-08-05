@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <div class="main-container-box">
+        <div class="volunteer-review">
+            <div class="volunteer-wrapper">
+                <img src="https://cdn.healingnlife.com/news/photo/202103/1042_1700_155.jpg" alt="Dog Shelter"
+                     class="background-image grid w-full h-[500px] ">
+            </div>
+            <div class="text-overlay-vr">
+                <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">봉사활동</h1>
+                <br>
+                <p class="mt-4 text-sm sm:text-base md:text-lg lg:text-xl">애니버스의 봉사활동은 유기동물들이 따뜻한 가정을 찾을 수 있도록 돕는 것을 목표로 합니다.<br>
+                    여러분의 작은 손길이 큰 사랑이 되어, 유기동물들에게 새로운 희망을 선물할 수 있습니다.<br>
+                </p>
+            </div>
+            <div class="container review-box">
+                <!-- 소메뉴 뽑기 -->
+                <div class="tiny-menu-box">
+                    <a th:href="@{/volunteer/list}">봉사활동</a>
+                    <a th:href="@{/volunteer/review}">봉사후기</a>
+                </div>
+                <div class="review-section">
+                    <div class="title-box">
+                        <span>전체 봉사후기</span>
+                        <span>(※ 봉사 후기 이미지 또는 제목을 클릭하면 상세내용을 확인하실 수 있습니다.)</span>
+                        <a th:if="${#authorization.expression('isAuthenticated()')}"
+                           th:href="@{/volunteer/review/create}" class="btn btn_link" onclick="return reviewCreate();">작성하기</a>
+                    </div>
+                    <div class="totalList-box">
+                        <ul class="review-notice-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-[80px] mt-3">
+                            <li th:each="review, loop : ${paging}" class="transition duration-300 rounded-lg hover:rounded-lg hover:-translate-y-1.5 hover:transition hover:duration-300 hover:shadow-md">
+                                <div class="left-image-box">
+                                    <a th:href="@{|/volunteer/review/detail/${review.id}|}">
+                                        <img th:src="@{${review.thumbnailImg}}" alt="대표이미지">
+                                    </a>
+                                </div>
+                                <div class="right-detail-box">
+                                    <a th:href="@{|/volunteer/review/detail/${review.id}|}">
+                                        <span th:text="${review.title}"></span>
+                                    </a>
+                                    <span th:text="'작성자 : ' + ${review.writer.nickname}"></span>
+                                    <span th:text="'조회수 : ' + ${review.hit}"></span>
+                                    <span th:text="'작성일자 : ' + ${#temporals.format(review.createDate, 'yyyy년 MM월 dd일')}"></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- 페이징 처리 시작 -->
+                        <ul th:if="${!paging.isEmpty()}" class="pagination flex justify-center mt-5">
+                            <li class="page-item" th:classappend="${paging.number == 0} ? 'disabled'">
+                                <a class="page-link" th:href="@{|?page=0|}">
+                                    <span>&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:classappend="@{!paging.hasPrevious} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number-1}">
+                                    <span>&lt;</span>
+                                </a>
+                            </li>
+                            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                                th:classappend="${page == paging.number} ? 'active'"
+                                class="page-item">
+                                <a th:text="${page+1}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
+                            </li>
+                            <li class="page-item" th:classappend="@{!paging.hasNext} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+1}">
+                                    <span>&gt;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:classappend="${paging.number == paging.totalPages - 1} ? 'disabled'">
+                                <a class="page-link" th:href="@{|?page=${paging.totalPages - 1}|}">
+                                    <span>&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <form th:action="@{/volunteer/review}" method="get" id="searchForm">
+                            <input type="hidden" id="page" name="page" th:value="${paging.number}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

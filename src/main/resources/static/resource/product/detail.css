@@ -1,0 +1,38 @@
+.product-img {
+            display: block;
+            margin: 0 auto;
+            max-width: 300px;
+        }
+        .section-prod-list {
+            padding: 20px;
+        }
+        .container-box {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        .card-header {
+            font-weight: bold;
+            background-color: #f8f9fa;
+        }
+        .btn-outline-dark {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .list-group-item span {
+            display: inline-block;
+            min-width: 80px;
+        }
+        .review-stars {
+            display: flex;
+            align-items: center;
+        }
+        .review-stars span {
+            margin-right: 5px;
+        }
+        .review-stars .stars {
+            color: gold;
+        }

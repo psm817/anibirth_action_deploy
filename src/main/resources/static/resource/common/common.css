@@ -1,0 +1,144 @@
+@font-face {
+  font-family: 'GmarketSansMedium';
+
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+
+  font-weight: normal;
+
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+html > body ul,
+html > body li {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+html > body {
+  font-family: 'Pretendard-Regular';
+  text-underline-position: under;
+}
+
+ul, li, a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    color: inherit;
+}
+
+.collapse {
+    visibility: visible !important;
+}
+
+/* 헤더 시작 */
+header > .menu-bar {
+    height: 100px;
+    display: flex;
+    width: 100%;
+}
+
+header > .menu-bar > .logo-box {
+    width: 10%;
+    margin-left: 20px;
+}
+
+header > .menu-bar > .logo-box > a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+header > .menu-bar > .logo-box > a > img {
+    width: 100%;
+    height: 100%;
+}
+
+header > .menu-bar > .menu-box {
+    width: 90%;
+    margin-left: 100px;
+}
+
+header > .menu-bar > .menu-box > ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header > .menu-bar > .menu-box > ul > li {
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: center;
+}
+
+header > .menu-bar > .menu-box > ul > li > a > span {
+    color: #323232;
+    font-weight: 800 !important;
+    font-size: 20px;
+}
+
+header > .menu-bar > .menu-box > ul > li > a > span:hover {
+    color: #FF416C;
+}
+
+/* 반응형 시작 */
+@media (max-width: 394px) {
+    header > .menu-bar {
+        height: 100%;
+        display: block;
+        width: 100%;
+    }
+
+    header > .menu-bar > .logo-box {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    header > .menu-bar > .logo-box > a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    header > .menu-bar > .logo-box > a > img {
+        width: 150px;
+        height: 100%;
+    }
+
+    header > .menu-bar > .menu-box {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    header > .menu-bar > .menu-box > ul {
+        margin-top: 8px;
+        margin-bottom: 13px;
+        width: 100%;
+        height: 100%;
+    }
+
+    header > .menu-bar > .menu-box > ul > li {
+        text-align: center;
+    }
+
+    header > .menu-bar > .menu-box > ul > li > a > span {
+        color: #323232;
+        font-weight: 800 !important;
+        font-size: 14px;
+    }
+
+    header > .menu-bar > .menu-box > ul > li > a > span:hover {
+        color: #FF416C;
+    }
+}

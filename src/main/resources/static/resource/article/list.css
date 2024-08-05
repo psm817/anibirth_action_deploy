@@ -1,0 +1,160 @@
+/* 전체 페이지 스타일 */
+.body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.section {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+
+}
+
+/* 링크 네비게이션 스타일 */
+.link-navigation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    margin: 40px;
+}
+
+.link {
+    color: #141214;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: #c23273;
+}
+
+.link.active {
+    color: #c23273;
+}
+
+/* 구분 기호 스타일 */
+.divider {
+    color: #6c757d;
+    margin: 0 0.5rem;
+}
+
+/* 컨테이너 스타일 */
+.container-list {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    margin: 4rem auto; /* 전체 컨테이너에 상하 간격 추가 */
+
+}
+
+/* 테이블 래퍼 스타일 */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 0 auto;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    padding: 0.5rem;
+    text-align: center; /* 중앙 정렬 */
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+td a {
+    color: #007bff;
+    text-decoration: none;
+}
+td.view-count {
+    padding-right: 2rem; /* 오른쪽 여백을 추가하여 오른쪽으로 이동 */
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+.button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* 관리 링크 스타일 */
+.link-manage {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 0.25rem;
+}
+
+.link-manage:hover {
+    text-decoration: underline;
+}
+
+/* 페이지네이션 스타일 */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pagination-button, .pagination-number {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0 0.25rem;
+}
+
+.pagination-button:hover, .pagination-number:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.pagination-number.active {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.pagination-button.disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    border-color: #dee2e6;
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <div class="container h-full">
+        <div class="left-box card w-[500px]">
+            <div class="profile-box card-header flex flex-col items-center">
+                <div class="profile-img mt-[10px]">
+                    <img th:src="@{${member.thumbnailImg}}" alt="프로필사진">
+                </div>
+                <div class="profile-name mt-[15px]">
+                    <span th:text="${member.nickname}"></span>
+                </div>
+            </div>
+            <div class="menu-box-d card-header">
+                <ul class="list-group list-group-flush gap-6 mt-2">
+                    <li th:if="${member.authority} != 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>마이프로필</span></a>
+                    </li>
+                    <li th:if="${member.authority} == 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>회원목록</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center volunteer">
+                        <a th:href="@{/member/myPage/volunteer}"><span>봉사내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center adopt">
+                        <a th:href="@{/member/myPage/adopt}"><span>입양내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center donation">
+                        <a th:href="@{/member/myPage/donation}"><span>후원 및 마켓내역</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-box card w-[100%] ">
+            <div class="title-box card-header flex items-center pl-[40px]">
+                <span>후원 및 마켓내역</span>
+                <a th:href="@{/member/myPage/donation}" class="btn btn-link ml-[20px]">후원내역 보기</a>
+            </div>
+            <div class="content-box card-header pl-[40px]">
+                <div class="total-box">
+                    <span th:if="${member.authority} == 2" th:text="${member.nickname} + '님이 구매하신 마켓내역은 총 0 건입니다.'"></span>
+                    <span th:if="${member.authority} == 1" th:text="${member.nickname} + '님이 등록하신 마켓물품은 총 0 건입니다.'"></span>
+                    <span th:if="${member.authority} == 0" th:text="'애니버스에 등록된 마켓물품 총 0 건입니다.'"></span>
+                </div>
+                <!-- 일반 회원일때 리스트 항목 -->
+                <div class="market-box-title card-body" th:if="${member.authority} == 2">
+                    <ul class="list-group list-group-flush gap-6">
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">번호</span>
+                            <span class="date w-[20%]">구매날짜</span>
+                            <span class="title w-[30%]">상품명</span>
+                            <span class="amount w-[20%]">금액</span>
+                            <span class="review w-[20%]">리뷰</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 최고/기업 관리자일때 리스트 항목 -->
+                <div class="market-box-title card-body" th:if="${member.authority} == 1 or ${member.authority} == 0">
+                    <ul class="list-group list-group-flush gap-6">
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">번호</span>
+                            <span class="date w-[20%]">등록날짜</span>
+                            <span class="title w-[30%]">상품명</span>
+                            <span class="amount w-[15%]">금액</span>
+                            <span class="review w-[15%]">평점</span>
+                            <span class="view w-[10%]">상품조회수</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 일반 회원일때 리스트 내용 -->
+                <div class="market-box-detail card-body" th:if="${member.authority} == 2">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">1</span>
+                            <span class="date w-[20%]">2024-07-22</span>
+                            <span class="title w-[30%]">강아지 목배게</span>
+                            <span class="amount w-[20%]">2,000원</span>
+                            <span class="review w-[20%]">
+                                <a href="#" class="btn btn-link">작성하기</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 최고 관리자일때 리스트 내용 -->
+                <div class="market-box-detail card-body" th:if="${member.authority} == 0">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">1</span>
+                            <span class="date w-[20%]">2024-07-20</span>
+                            <span class="title w-[30%]">강아지 목배게</span>
+                            <span class="amount w-[15%]">2,000원</span>
+                            <span class="review w-[15%]">4.2점</span>
+                            <span class="view w-[10%]">253회</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 중간 관리자일때 리스트 내용 -->
+                <div class="market-box-detail card-body" th:if="${member.authority} == 1">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[10%]">1</span>
+                            <span class="date w-[20%]">2024-07-20</span>
+                            <span class="title w-[30%]">강아지 목배게</span>
+                            <span class="amount w-[15%]">2,000원</span>
+                            <span class="review w-[15%]">4.2점</span>
+                            <span class="view w-[10%]">253회</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

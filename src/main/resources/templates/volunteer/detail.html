@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="section-prod-list">
+    <div class="container volunteer-detail">
+        <div class="card top-box">
+            <div class="thumbnail-box">
+                <img th:src="@{${volunteer.thumbnailImg}}" alt="상품이미지">
+            </div>
+            <ul class="detail-box list-group list-group-flush gap-2 ml-3">
+                <li class="list-group-item">
+                    <span class="font-bold" th:text="${volunteer.title}"></span>
+                    <a class="btn btn-link" th:href="@{/volunteer/list}">목록보기</a>
+                </li>
+                <li class="list-group-item">
+                    <span>주최 보호소</span>
+                    <span th:text="${volunteer.register.nickname}"></span>
+                </li>
+                <li class="list-group-item">
+                    <span>봉사 기간</span>
+                    <span th:text="${formattedStartDateTime} + ' ~ ' + ${formattedEndDateTime}"></span>
+                </li>
+                <li class="list-group-item">
+                    <span>신청 마감날짜</span>
+                    <span th:text="${volunteer.deadLineDate}"></span>
+                </li>
+                <li class="list-group-item applicant-box">
+                    <span>신청 인원</span>
+                    <span th:text="${#lists.size(ApplicationList)} + ' 명'"></span>
+                    <button th:if="${#authorization.expression('isAuthenticated()')} and (${member.authority} == 0 or (${member.authority} == 1 and ${member.username} == ${volunteer.register.username}))" type="button" class="btn btn-primary" id="show-applicants-btn">신청인원보기</button>
+                </li>
+                <li class="list-group-item">
+                    <span>모집 인원</span>
+                    <span th:text="${volunteer.limit} + ' 명'"></span>
+                </li>
+                <li class="list-group-item">
+                    <span>봉사 주소</span>
+                    <span id="volunteer-location" th:text="${volunteer.location}"></span>
+                    <button type="button" class="btn btn-primary" id="show-map-btn">지도보기</button>
+                </li>
+                <!-- 일반회원일 때 신청, 완료, 마감 표시  -->
+                <li class="list-group-item apply-btn" th:if="${#authorization.expression('isAuthenticated()')} and (${member.authority} == 2)">
+                    <a class="btn btn-primary" th:if="${!alreadyApplied} and ${!isDeadlinePassed}" th:href="@{|/volunteer/apply/${volunteer.id}?apply=true|}" onclick="return confirmApply();">신청하기</a>
+                    <span th:if="${alreadyApplied}">신청완료</span>
+                    <span th:if="${isDeadlinePassed}">신청마감</span>
+                </li>
+                <!-- 관리자, 중간관리자일 때 수정, 삭제  -->
+                <li class="list-group-item modify-btn" th:if="${#authorization.expression('isAuthenticated()')} and (${member.authority} == 0 or (${member.authority} == 1 and ${member.username} == ${volunteer.register.username}))">
+                    <a class="btn btn-primary" th:href="@{|/volunteer/modify/${volunteer.id}|}" onclick="return volunteerModify();">수정</a>
+                    <a class="btn btn-primary" th:href="@{|/volunteer/delete/${volunteer.id}|}" onclick="return volunteerDelete();">삭제</a>
+                </li>
+                <!-- 미로그인 시 알림 -->
+                <li class="list-group-item alarm-box" th:if="${#authorization.expression('isAnonymous()')}">
+                    <span>※ 봉사활동 신청은 로그인 후 신청 가능합니다.</span>
+                </li>
+            </ul>
+        </div>
+        <div class="card bottom-box">
+            <div class="title-box">
+                <h1>봉사 상세 내용</h1>
+            </div>
+            <!-- th:text 적용해야됨 -->
+            <div class="content-box">
+                <span th:utext="${volunteer.content}"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 카카오맵 모달 -->
+    <div id="map-modal" class="modal">
+        <div class="modal-content">
+            <div class="top-box">
+                <span>지도보기</span>
+                <span class="close">&times;</span>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+    <!-- 신청인원 모달 -->
+    <div id="applicants-modal" class="modal">
+        <div class="modal-content">
+            <div class="top-box">
+                <span>신청 인원 목록</span>
+                <span class="close">&times;</span>
+            </div>
+            <div id="applicants-list">
+                <ul class="title-box">
+                    <li>
+                        <span class="id">번호</span>
+                        <span class="nickname">활동명</span>
+                        <span class="email">이메일</span>
+                    </li>
+                </ul>
+                <ul class="content-box">
+                    <li th:each="applicant, loop : ${ApplicationList}">
+                        <span class="id" th:text="${loop.index} + 1"></span>
+                        <span class="nickname" th:text="${applicant.member.nickname}"></span>
+                        <span class="email" th:text="${applicant.member.email}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

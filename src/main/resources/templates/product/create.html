@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 justify-center items-center">
+
+    <h1>컨텐츠 생성 페이지</h1>
+    <form th:action="@{/product/create}" method="post" enctype="multipart/form-data">
+        제목 : <input type="text" name="title"><br>
+        내용 : <input type="text" name="description"><br>
+        가격 : <input type="number" name="price"><br>
+        썸네일: <input type="file" name="thumbnail" accept="image/png, image/gif, image/jpeg"><br>
+        <button type="submit">전송</button>
+
+    </form>
+    <ul th:each="product: ${productList}">
+        <li th:text="${product.title}"></li>
+        <li th:text="${product.description}"></li>
+        <li th:text="${product.price}"></li>
+        <li><img th:src="@{|/gen/${product.thumbnailImg}|}" alt="test이미지"></li>
+    </ul>
+</section>
+</html>

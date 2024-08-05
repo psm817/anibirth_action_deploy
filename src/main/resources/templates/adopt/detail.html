@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <section class="adopt-total">
+        <div class="container adopt-detail-head">
+            <div class="adopt-info">
+                <h1 class="h2 g-font-size-28 g-line-height-1">입양동물 정보</h1>
+            </div>
+        </div>
+        <div class="container adopt-detail-content">
+            <div class="row-adopt" th:each="animal, loop : ${animal}">
+                <div class="adopt img">
+                    <div class="adopt-img-big">
+                        <a th:href="@{|http://www.daejeon.go.kr/${animal.filePath}|}">
+                            <img class="block " th:src="@{|http://www.daejeon.go.kr/${animal.filePath}|}"
+                                 alt="이미지가 존재하지 않습니다.">
+                        </a>
+                    </div>
+                    <div class="adopt-img-small">
+                    </div>
+                </div>
+                <div class="adopt content">
+                    <h1 class="h3 g-color-primary font-weight-bold mt-4">
+                        <span class="animal_name">아미</span>
+                        <span class="g-color-gray-dark-v5 g-font-weight-400 g-font-size-12 text-uppercase">D2023090254</span>
+                    </h1>
+                    <hr class="my-5">
+                    <ul class="list-animal-info">
+                        <li class="adoptanimal info-1">
+                            <div class="d-flex w-40 w-sm-30">
+                                <small class="text-muted"> 종<!-- /품종 --> </small>
+                            </div>
+                            <div class="adoptanimal-body">
+                                <h3 class="h6">개</h3>
+                            </div>
+                        </li>
+                        <li class="adoptanimal info-1">
+                            <div class="d-flex w-40 w-sm-30">
+                                <small class="text-muted"> 성별(중성화) </small>
+                            </div>
+                            <div class="adoptanimal-body">
+                                <h3 class="h6">암컷 / 중성화 O</h3>
+                            </div>
+                        </li>
+                        <li class="adoptanimal info-1"></li>
+                        <div class="d-flex w-40 w-sm-30">
+                            <small class="text-muted"> 추정나이 </small>
+                        </div>
+                        <div class="adoptanimal-body">
+                            <h3 class="h6">
+                                3살
+                                10개월
+                            </h3>
+                        </div>
+                        <li class="adoptanimal info-1">
+                            <div class="d-flex w-40 w-sm-30">
+                                <small class="text-muted"> 몸무게 </small>
+                            </div>
+                            <div class="adoptanimal-body">
+                                <h3 class="h6">1.9kg</h3>
+                            </div>
+                        </li>
+                        <li class="adoptanimal info-0">
+                            <div class="d-flex w-40 w-sm-30">
+                                <small class="text-muted"> 털색 </small>
+                            </div>
+                            <div class="adoptanimal-body">
+                                <h3 class="h6 mb-0">화이트</h3>
+                            </div>
+                        </li>
+                    </ul>
+                    <hr class="my-5">
+                    <div class="row mx-n2">
+                        <div class="col-md-6 px-2 mb-1 mb-md-0">
+                            <span class="ml-1" data-toggle="tooltip" data-placement="top" title=""
+                                  data-original-title="" style="max-width: 750px;">친화도 <i class="fa fa-info-circle"></i></span>
+                            <span class="g-pr-5"></span>
+                            <div class="blue-box ml-1">
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-2 mb-1 mb-md-0">
+                            <span class="ml-1" data-toggle="tooltip" data-placement="top" title=""
+                                  data-original-title="" style="max-width: 750px;">활발함 <i class="fa fa-info-circle"></i></span>
+                            <span class="g-pr-5"></span>
+                            <div class="blue-box ml-1">
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                                <span class="btn btn-xs btn-primary btn-pill mb-1 g-mt-minus-3"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mx-n2 space-1">
+                        <div class="col-6 col-md-3 px-2 mb-3 mb-md-0">
+                            <div class="card card-frame h-100">
+                                <div class="card-body bg-kams text-center p-1">
+                                    <span class="g-font-size-13" data-toggle="tooltip" data-placement="top" title=""
+                                          data-original-title="무관심하거나 친화적입니다" style="max-width: 750px;">타동물친화 <i
+                                            class="fa fa-info-circle"></i></span>
+                                </div>
+                                <div class="card-body text-center p-2">
+                                    <h2 class="h3 font-weight-bold text-kams mb-0">YES</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adopt-button">
+                        <!-- 입양하기 -->
+                        <!-- GA 클래스 추가 detail_adopt_application_event -->
+                        <a href="/adopt/apply" target="_blink">
+                            <button class="btn btn-block btn-primary detail_adopt_application_event" type="button" style="margin-top: 5px">
+                                입양하기
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="section-recharge-fail">
+    <style>
+        .fail-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            height: 500px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 32px;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            background: #212121; /* 배경 색상 추가 */
+            margin: 20px auto; /* 페이지 중앙에 위치하도록 */
+        }
+
+        .fail-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            color: #e8e8e8;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .fail-content .heading {
+            font-weight: 700;
+            font-size: 32px;
+        }
+
+        .fail-content .para {
+            line-height: 1.5;
+        }
+
+        .fail-content .btn {
+            color: #e8e8e8;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .fail-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+            z-index: -1;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .fail-card:hover::before {
+            width: 100%;
+        }
+
+        .fail-card:hover {
+            box-shadow: none;
+        }
+
+        .fail-card:hover .btn {
+            color: #212121;
+            background: #e8e8e8;
+        }
+
+        .fail-content .btn:hover {
+            outline: 2px solid #e8e8e8;
+            background: transparent;
+            color: #e8e8e8;
+        }
+
+        .fail-content .btn:active {
+            box-shadow: none;
+        }
+    </style>
+
+
+    <div class="container">
+        <h1 class="text-[1.5rem] font-bold flex justify-center pt-5 pb-5">포인트 충전 실패</h1>
+
+        <div class="fail-card">
+            <div class="fail-content">
+                <span class="heading">충전 실패</span>
+                <p class="para">포인트 충전에 실패했습니다. 다시 시도해 주세요.</p>
+                <a href="/" class="btn">홈으로 돌아가기</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</html>

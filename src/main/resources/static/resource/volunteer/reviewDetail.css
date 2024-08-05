@@ -1,0 +1,161 @@
+.review-detail {
+    width: 100%;
+    height: 100% !important;
+    padding-top: 30px;
+}
+
+.review-detail > .top-box {
+    width: 100%;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    border: transparent;
+}
+
+.review-detail > .top-box > .detail-box {
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+    align-items: start;
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.review-detail > .top-box > .detail-box > span {
+    height: 70px;
+    font-size: 23px;
+    line-height: 70px;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box > .description-box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box > .description-box > .bar {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box > .description-box > a {
+    padding: 0px;
+    font-size: 14px;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box > .btn-box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box > .btn-box > a {
+    border: 1px solid #FF416C;
+    border-radius: 6px;
+    background-color: #FF416C;
+    color: #fff;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px; padding-right: 15px;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box > .btn-box > a:hover {
+    background-color: #fff;
+    color: #121212;
+}
+
+.review-detail > .top-box > .detail-box > .flex-box > .btn-box > a:nth-child(2) {
+    margin-left: 10px;
+}
+
+.review-detail > .top-box > .content-box {
+    padding-left: 200px;
+    padding-right: 200px;
+    height: 100%;
+    width: 100%;
+}
+
+.review-detail > .top-box > .content-box > .subImg-box {
+    width: 100%;
+    height: 600px;
+    margin-top: 20px;
+}
+
+.review-detail > .top-box > .content-box > .subImg-box > img {
+    width: 100%;
+    height: 100%;
+}
+
+.review-detail > .top-box > .content-box > .body-box {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.review-detail > .top-box > .content-box > .body-box > span {
+    font-size: 18px;
+}
+
+/* 반응형 시작 */
+@media(max-width: 394px) {
+    .review-detail {
+        padding-top: 10px;
+    }
+
+    .review-detail > .top-box > .detail-box {
+        height: 210px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .review-detail > .top-box > .detail-box > span {
+        height: 70px;
+        font-size: 20px;
+        line-height: 70px;
+    }
+
+    .review-detail > .top-box > .detail-box > .flex-box {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .review-detail > .top-box > .detail-box > .flex-box > .description-box {
+        flex-direction: column;
+        align-items: start;
+        width: 100%;
+        height: 110px;
+    }
+
+    .review-detail > .top-box > .detail-box > .flex-box > .description-box > .bar {
+        display: none;
+    }
+
+    .review-detail > .top-box > .detail-box > .flex-box > .btn-box {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        width: 100%;
+    }
+
+    .review-detail > .top-box > .content-box {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 100%;
+        width: 100%;
+    }
+
+    .review-detail > .top-box > .content-box > .subImg-box {
+        width: 100%;
+        height: 300px;
+        margin-top: 20px;
+    }
+}

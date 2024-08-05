@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<head>
+    <title>Q&A 목록</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resource/qa/list.css}">
+</head>
+<body>
+<section layout:fragment="content" class="flex-1 flex flex-col items-center py-8">
+
+    <!-- 링크 네비게이션 -->
+    <div class="link-navigation">
+        <a th:href="@{/article/list}" class="link">공지사항</a>
+        <span class="divider">|</span>
+        <a th:href="@{/qa/list}" class="link active">Q&A</a>
+    </div>
+    <div class="container-all">
+        <div class="container-qa">
+            <ul class="qna">
+                <li>
+                    <input type="checkbox" id="qna-1">
+                    <label for="qna-1">기부금영수증이란?</label>
+                    <div>
+                        <p>1. 기부금영수증이란?
+                            기부금을 낸 사람에게 발급하는 증명서류입니다.
+                            기부금은 소득세법과 법인세법에 의해 필요경비 산입 또는 기부금 세액공제를 받거나 손금에 산입하기 위하여 발급합니다.
+                            (물론 기부금을 낸 단체가 근거법령에 따라 기부금공제대상 기부금단체여야만 합니다.)
+                            근로자들이 연말정산을 하는 매년 1월, 그리고 종합소득세 신고가 있는 5월에 문의가 집중됩니다.
+                            전년도 기부금에 대한 영수증은 이듬해 1월에 발급됩니다.</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" id="qna-2">
+                    <label for="qna-2">동물학대 현장을 목격했어요 어떻게 하죠?</label>
+                    <div>
+                        <p>현행 동물보호법(동물보호법 제8조) 상에서 동물학대는 다음과 같은 사항이 포함됩니다.
+                        <p>
+                            1. 살해행위(죽이는 행위)
+                            1) 목을 매다는 등의 잔인한 방법으로 죽이는 행위
+                            2) 노상 등 공개된 장소에서 죽이거나 같은 종류의 다른 동물이 보는 앞에서 죽이는 행위
+                            3) 고의로 사료 또는 물을 주지 아니하는 행위로 인하여 동물을 죽음에 이르게 하는 행위
+                            4) 그 밖에 수의학적 처치의 필요, 동물로 인한 사람의 생명·신체·재산의 피해 등 농림축산식품부령으로 정하는 정당한 사유 없이 죽이는 행위
+                        </p>
+                        <p>
+                            2. 상해행위(다치게 하는 행위)
+                            1) 도구·약물을 사용하여 상해를 입히는 행위. 다만, 질병의 예방이나 치료 등 농림축산식품부령으로 정하는 경우는 제외한다.
+                            2) 살아 있는 상태에서 동물의 신체를 손상하거나 체액을 채취하거나 체액을 채취하기 위한 장치를 설치하는 행위. 다만, 질병의 치료 및 동물실험 등
+                            농림축산식품부령으로 정하는 경우는 제외한다.
+                            3) 도박·광고·오락·유흥 등의 목적으로 동물에게 상해를 입히는 행위. (전통소싸움 제외)
+                            4) 그 밖에 수의학적 처치의 필요, 동물로 인한 사람의 생명·신체·재산의 피해 등 농림축산식품부령으로 정하는 정당한 사유 없이 상해를 입히는 행위
+                        </p>
+                        <p>
+                            3. 유실·유기동물과 소유자를 알 수 없는 피학대 동물에 대한 금지행위
+                            1) 포획하여 판매하거나 죽이는 행위
+                            2) 제14조제1항에 따른 보호조치의 대상이 되는 동물임을 알면서 알선·구매하는 행위
+                        </p>
+                        <p>
+                            4. 동물의 유기</p>
+                        <p>
+                            5. 학대의 범주에 해당하는 행위를 촬영한 영상물을 판매·전시·전달·상영하거나 인터넷에 게하는 행위
+                        </p>
+                        만약 위에 해당하는 사항들의 진행중인 행위 혹은 목격하여 증거(영상,사진,자백녹취 등)를 수집하셨다면 해당 지역의 경찰 또는 시/군/구청의 동물보호감시원(유기동물담당
+                        공무원)에게 즉시 신고해주시기 바랍니다.
+                        기타 다른 문의사항은 애니버스 사무국 02-1234-5678로 부탁드립니다.</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" id="qna-3">
+                    <label for="qna-3">애니버스에서 동물을 입양하고 싶어요 어떻게 하나요?</label>
+                    <div>
+                        <p>애니버스 <a th:href="@{/}" class="link">홈페이지</a> 상단 입양 > <a th:href="@{/adopt/list}" class="link">입양하기</a>
+                            메뉴에서 입양 대상 동물들의 정보를 확인하시고 입양신청서를 작성하실 수 있습니다. </p>
+                        <p>신청서를 작성해주시면 서류 검토 후 담당자 상담을 통해서 입양 여부가 확정됩니다. 입양을 고민하고 계신다면 먼저 애니버스 센터 아름품(02-1234-5678)에
+                            방문하셔서 동물들을 만나보시는 것도 도움이 됩니다.</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" id="qna-4">
+                    <label for="qna-4">배송된 상품이 부재중으로 반송된 경우 어떻게 하나요?</label>
+                    <div>
+                        <p>부재 등의 사유로 반송된 상품은 <a th:href="@{/member/myPage/myProfile}" class="link">마이페이지</a> > 주문 조회"]"에서 택배사 영업소, 또는 배송 담당 택배원 연락처를 통해 재배송 요청을 할 수 있습니다. 상품이 이미
+                            반송되어 해당 업체로 입고된 경우, 왕복 배송비를 추가 부담하셔야 합니다.</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" id="qna-5">
+                    <label for="qna-5">동물을 처음 키우는데 잘 키울 수 있을까요?</label>
+                    <div>
+                        <p>반려의 경험이 없다고하여 카라에서의 입양이 안되는 것은 아닙니다.
+                            반려동물은 평균 15년 이상을 사는 소중한 생명입니다. 따라서 성공적인 입양이 되기 위해서 필요한 사전 점검사항이 있습니다.
+                        <p>
+                            동물을 사랑하는 마음과 책임감을 가지고 돌보기 위해 본인의 현재 상황과 주거환경, 이후 결혼이나 이주 계획등에 대해 심사숙고 해 주셔야 합니다. 또한 원하는 동물에
+                            따라 사전에 충분히 정보를 수집하여 해당 동물의 특징을 인지하고 직·간접적으로 경험을 하시는것이 중요합니다.
+                        </p>
+                        <p>
+                            예를 들어, 개를 입양하고 싶으시다면 '개'라는 동물의 특징을 아셔야 합니다. 개들은 짖기도 하고 배변실수도 할 수 있으며, 매일 산책을 해주어야 합니다. 또한 개는
+                            인간과의 유대가 강한 동물이기 때문에 장시간 혼자 두는 것 보다는 가족과 함께하는 시간이 많은 것이 좋습니다.
+                        </p>
+                        <p>
+                            동물에 대한 경험이 부족하여 고민이 되신다면, 더불어숨 센터에 있는 아름품과 같이 입양을 기다리는 동물들을 접할 수 있는 공간을 여러 차례 방문하여 관찰해 보시거나
+                            구조된 동물 혹은 지인의 동물을 일정기간동안 임시로 보호를 해보시는 것도 입양 전에 해볼 수 있는 좋은 경험 입니다.
+                        </p>
+                        <p>
+                            누구에게나 처음이 있고, 처음은 언제나 어렵게 느껴지죠.
+                            평생을 함께할 가족을 들이는 것인 만큼 조금만 마음에 여유를 두고 준비해주세요.
+                            그 이후 당신에게 온 작고 따뜻한 이 생명들은 당신에게 세상 그 누구에게서도 받지못했던 또 다른 사랑과 추억을 아낌없이 줄테니까요!
+                        </p>
+                        <p>
+                            애니버스 입양
+                            입양·결연 > <a th:href="@{/adopt/list}" class="link">입양하기</a> 메뉴에서 입양신청서 작성을 부탁드립니다.</p>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="container-list">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="py-2 px-4 border-b">번호</th>
+                        <th class="py-2 px-4 border-b">제목</th>
+                        <th class="py-2 px-4 border-b">작성자</th>
+                        <th class="py-2 px-4 border-b">작성일</th>
+                        <th class="py-2 px-4 border-b>">조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="qa, loop : ${paging.content}">
+                        <td class="py-2 px-4 border-b text-center" th:text="${paging.number * paging.size + loop.index + 1}"></td>
+                        <td class="py-2 px-4 border-b">
+                            <a th:href="@{|/qa/${qa.id}|}" th:text="${qa.title}"></a>
+                        </td>
+                        <td class="py-2 px-4 border-b text-center" th:text="${qa.member.username}"></td>
+                        <td class="py-2 px-4 border-b text-center"
+                            th:text="${#temporals.format(qa.createDate, 'yyyy-MM-dd')}"></td>
+                        <td class="py-2 px-4 border-b text-center" th:text="${qa.viewCount}"></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${#lists.isEmpty(paging.content)}" class="text-center py-4">
+                <p>등록된 질문이 없습니다.</p>
+            </div>
+
+            <!-- 질문 등록 버튼 -->
+            <div th:if="${#authorization.expression('isAuthenticated()')}" class="mt-7 text-right">
+                <a th:href="@{/qa/create}" class="button">질문 등록</a>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div th:if="${!#lists.isEmpty(paging.content)}" class="pagination-container">
+                <!-- << 처음 페이지로 이동 -->
+                <a th:href="@{|/qa/list?page=0&size=${paging.size}|}" class="pagination-button"
+                   th:classappend="${!paging.hasPrevious()} ? 'disabled'"> << </a>
+
+                <!-- < 이전 페이지로 이동 -->
+                <a th:href="@{|/qa/list?page=${paging.number - 1}&size=${paging.size}|}" class="pagination-button"
+                   th:classappend="${!paging.hasPrevious()} ? 'disabled'"> < </a>
+
+                <!-- 페이지 번호들 -->
+                <span th:each="page : ${#numbers.sequence(0, paging.totalPages - 1)}"
+                      th:if="${page >= paging.number - 3 and page <= paging.number + 3}">
+                <a th:href="@{|/qa/list?page=${page}&size=${paging.size}|}" class="pagination-number"
+                   th:classappend="${page == paging.number} ? 'active'">
+                    <span th:text="${page + 1}"></span>
+                </a>
+            </span>
+
+                <!-- > 다음 페이지로 이동 -->
+                <a th:href="@{|/qa/list?page=${paging.number + 1}&size=${paging.size}|}" class="pagination-button"
+                   th:classappend="${!paging.hasNext()} ? 'disabled'"> > </a>
+
+                <!-- >> 마지막 페이지로 이동 -->
+                <a th:href="@{|/qa/list?page=${paging.totalPages - 1}&size=${paging.size}|}" class="pagination-button"
+                   th:classappend="${!paging.hasNext()} ? 'disabled'"> >> </a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

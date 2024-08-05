@@ -1,0 +1,129 @@
+html, body {
+    position: relative;
+    height: 100%;
+}
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+html > body .adopt-total {
+    width: 1340px;
+}
+
+html > body .adopt-detail-head {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+html > body .adopt-total .adopt-detail-head .adopt-info > .h2 {
+    font-weight: bold;
+}
+
+
+/* 입양 상세 내용 스타일 */
+html > body .adopt-detail-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 입양 항목의 이미지와 콘텐츠를 좌우로 배치 */
+html > body .adopt-detail-content > .row-adopt {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    gap: 40px; /* 이미지와 콘텐츠 사이의 간격 */
+
+}
+
+/* 이미지와 콘텐츠 각각 50% 차지하도록 설정 */
+.adopt.img,
+.adopt.content {
+    flex: 1;
+    max-width: 50%;
+    box-sizing: border-box;
+}
+
+.adopt.content {
+    padding-left: 50px;
+}
+
+/* 이미지 스타일 */
+.adopt-img-big img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.adopt-button .btn-block {
+    width: 100%;
+    display: block;
+    background-color: #004ba0;
+    border-color: #004ba0;
+}
+
+/*html > body .adopt-detail-content .content > .mx-n2 {
+    margin-bottom: 20px;
+}*/
+html > body .adopt-detail-content .content .mx-n2 > .px-2 {
+    display: flex;
+    justify-content: start;
+
+}
+
+html > body .adopt-detail-content .row-adopt .content .space-1 > .card-frame {
+    border: 1px solid #e7eaf3;
+    transition: 0.3s;
+}
+
+.bg-kams {
+    background-color: #ffd66d;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-kams {
+    color: #ffd66d;
+}
+
+html > body .adopt-detail-content .row-adopt .content .space-1
+
+
+
+/* 반응형 디자인: 작은 화면에서는 세로로 배치 */
+@media (max-width: 394px) {
+
+    .row-adopt {
+        flex-direction: column;
+    }
+
+    .adopt.img,
+    .adopt.content {
+        max-width: 100%;
+    }
+
+
+    html > body .adopt-detail-content .content > .mx-n2 {
+        margin-left: -0.5rem !important;
+        margin-right: -0.5rem !important;
+    }
+
+    html > body .adopt-detail-content .content .mx-n2 > .px-2 {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+}
+
+

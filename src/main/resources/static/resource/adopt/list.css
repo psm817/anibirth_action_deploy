@@ -1,0 +1,165 @@
+html, body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.container-box {
+  width: 100%;
+}
+
+html > body .container-box > .adopt {
+  width: 100%;
+  height: 380px;
+  margin-bottom: 20px;
+}
+
+html > body .adopt-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+html > body .adopt-banner {
+  text-align: center;
+  font-size: 18px;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.adopt-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+html > body .container-box > .adoptlist {
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+}
+
+html > body .container > .category-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.select-box {
+    width: 152px;
+    height: 47.38px;
+}
+
+.select-box > .msg-aria {
+    height: 47.38px;
+}
+
+.custom-select {
+    display: inline-block;
+    width: 100%;
+    height: calc(1.5em + 1.5rem + 1px);
+    padding: 0.75rem 2rem 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #1e2022;
+    vertical-align: middle;
+    background: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e) no-repeat right 1rem center / 8px 10px;
+    background-color: #fff;
+    border: 1px solid #d5dae2;
+    border-radius: 0.3125rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.category-search-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 112px;
+
+}
+
+.category-search-section > .input-group {
+    margin-right: 40px;
+}
+
+.category-search-section > .search-group {
+    margin-right: 5px
+}
+.category-search-section > .search-group > .btn.btn-sm.btn-block.btn-primary {
+    background-color: #004ba0;
+    border-color: #004ba0;
+    height: 38px;
+}
+
+html > body .container-box .adoptlist > .adopt-notice-list {
+    padding-top: 25px;
+}
+
+
+/* 노트북 & 테블릿 가로 (해상도 1024px ~ 1279px)*/
+@media all and (min-width:1024px) and (max-width:1279px) {
+  html > body .adopt {
+          height: 300px;
+      }
+      .adopt-banner img {
+          height: 100%;
+      }
+}
+
+ /*테블릿 가로 (해상도 768px ~ 1023px)*/
+@media all and (min-width:768px) and (max-width:1023px) {
+    html > body .adopt {
+        height: 250px;
+    }
+    .adopt-banner img {
+        height: 100%;
+    }
+}
+
+/* 모바일 가로 & 테블릿 세로 (해상도 480px ~ 767px)*/
+
+@media all and (min-width:480px) and (max-width:767px) {
+    html > body .adopt {
+        height: 200px;
+    }
+    .adopt-banner img {
+        height: 100%;
+    }
+}
+
+
+/* 모바일 세로 (해상도 ~ 479px)*/
+
+@media all and (max-width:479px) {
+    html > body .adopt {
+        height: 150px;
+    }
+    .adopt-banner img {
+        height: 100%;
+    }
+}
+
+@media all and (max-width:394px) {
+    html > body .container-box > .adopt {
+            display: none;
+        }
+}

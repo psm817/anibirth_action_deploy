@@ -1,0 +1,369 @@
+.volunteer-detail {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 디테일 박스 시작 */
+.volunteer-detail > .top-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+    padding: 20px 100px 10px 100px;
+    border: transparent;
+}
+
+.volunteer-detail > .top-box > .thumbnail-box {
+    width: 500px;
+    height: 500px;
+}
+
+.volunteer-detail > .top-box > .thumbnail-box > img {
+    width: 100%;
+    height: 100%;
+}
+
+.volunteer-detail > .top-box > .detail-box {
+    width: 700px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: transparent;
+}
+
+.volunteer-detail > .top-box > .detail-box > li {
+    background-color: transparent;
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+/* 봉사 디테일 항목 제목 */
+.volunteer-detail > .top-box > .detail-box > li > span:nth-child(1) {
+    font-size: 18px;
+    font-weight: 700;
+    width: 120px;
+}
+
+/* 봉사명 */
+.volunteer-detail > .top-box > .detail-box > li:nth-child(1)  {
+    border-bottom: transparent;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.volunteer-detail > .top-box > .detail-box > li:nth-child(1) > span {
+    font-size: 22px;
+    flex-grow: 5;
+    flex-basis: 0;
+}
+
+.volunteer-detail > .top-box > .detail-box > li:nth-child(1) > a {
+    flex-grow: 1;
+    flex-basis: 0;
+    background-color: transparent;
+}
+
+/* 봉사기간 */
+.volunteer-detail > .top-box > .detail-box > li:nth-child(3) > span:nth-child(2)  {
+    width: 425px;
+}
+
+/* 봉사 디테일 항목 내용 */
+.volunteer-detail > .top-box > .detail-box > li > span:nth-child(2) {
+    width: 415px;
+    margin-left: 30px;
+    font-size: 16px;
+}
+
+.volunteer-detail > .top-box > .detail-box > .applicant-box > span:nth-child(2) {
+    width: 50px;
+}
+
+/* 지도보기 버튼 커스텀 */
+.volunteer-detail > .top-box > .detail-box > li > button {
+    border: transparent;
+    background-color: #FF612C;
+}
+
+/* 신청하기 버튼 커스텀 */
+.volunteer-detail > .top-box > .detail-box > .apply-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.volunteer-detail > .top-box > .detail-box > .apply-btn > span {
+    color: #d15a4f;
+}
+
+/* 수정, 삭제하기 버튼 커스텀 */
+.volunteer-detail > .top-box > .detail-box > .modify-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.volunteer-detail > .top-box > .detail-box > .modify-btn > a:nth-child(1) {
+    margin-right: 40px;
+}
+
+.volunteer-detail > .top-box > .detail-box > li > a {
+    border: transparent;
+    background-color: #FF416C;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.volunteer-detail > .top-box > .detail-box > .alarm-box > span {
+    width: 400px !important;
+    color: #d15a4f;
+}
+
+/* 하단 봉사내용 박스 시작 */
+.volunteer-detail > .bottom-box {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-left: 125px;
+    padding-right: 125px;
+    border: transparent;
+}
+
+.volunteer-detail > .bottom-box > .title-box {
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.volunteer-detail > .bottom-box > .title-box > h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.volunteer-detail > .bottom-box > .content-box {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.volunteer-detail > .bottom-box > .content-box > span {
+    font-size: 16px;
+}
+
+/* 모달 스타일 추가 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal > .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* 모달 상단 제목과 닫기 */
+.modal > .modal-content > .top-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.modal > .modal-content > .top-box > span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modal > .modal-content > .top-box > .close {
+    color: #aaa;
+    font-size: 26px;
+    font-weight: bold;
+    position: absolute;
+    right: 8%;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 카카오맵 크기 */
+.modal > .modal-content > #map {
+    width: 100%;
+    height: 400px;
+}
+
+/* 신청인원 크기 */
+.modal > .modal-content > #applicants-list {
+    width: 100%;
+    height: 500px;
+    margin-top: 10px;
+}
+
+.modal > .modal-content > #applicants-list > ul > li {
+    display: flex;
+}
+
+.modal > .modal-content > #applicants-list > ul > li > .id {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.modal > .modal-content > #applicants-list > ul > li > .nickname {
+    flex-grow: 2;
+    flex-basis: 0;
+}
+
+.modal > .modal-content > #applicants-list > ul > li > .email {
+    flex-grow: 4;
+    flex-basis: 0;
+}
+
+.modal > .modal-content > #applicants-list > .title-box {
+    margin-bottom: 20px;
+}
+
+.modal > .modal-content > #applicants-list > .content-box > li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/* 반응형 시작 */
+@media(max-width: 394px) {
+    .volunteer-detail {
+        padding: 0px;
+    }
+
+    /* 상단 디테일 박스 시작 */
+    .volunteer-detail > .top-box {
+        flex-direction: column;
+        height: 700px !important;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .volunteer-detail > .top-box > .thumbnail-box {
+        width: 100%;
+        height: 250px;
+    }
+
+    .volunteer-detail > .top-box > .detail-box {
+        width: 100%;
+        height: 100%;
+        display: block;
+        margin-left: 0px;
+    }
+
+    .volunteer-detail > .top-box > .detail-box > li {
+        text-align: left;
+        display: flex;
+    }
+
+    /* 봉사 디테일 항목 제목 */
+    .volunteer-detail > .top-box > .detail-box > li > span:nth-child(1) {
+        font-size: 15px;
+        width: 90px;
+    }
+
+    /* 봉사명 */
+    .volunteer-detail > .top-box > .detail-box > li:nth-child(1) > span {
+        font-size: 20px;
+        width: 250px;
+        margin-top: 10px;
+    }
+
+    .volunteer-detail > .top-box > .detail-box > li:nth-child(1) > .btn-link {
+        background-color: transparent;
+        padding: 0px;
+        margin-top: 10px;
+    }
+
+    /* 봉사 디테일 항목 내용 */
+    .volunteer-detail > .top-box > .detail-box > li > span:nth-child(2) {
+        width: 250px;
+        margin-left: 10px;
+        font-size: 16px;
+    }
+
+    /* 봉사주소 커스텀 */
+    .volunteer-detail > .top-box > .detail-box > li:nth-child(7) {
+        display: block;
+        height: 110px;
+    }
+
+    .volunteer-detail > .top-box > .detail-box > li:nth-child(7) > span:nth-child(1) {
+        display: block;
+        width: 90px;
+    }
+
+    .volunteer-detail > .top-box > .detail-box > li:nth-child(7) > span:nth-child(2) {
+        display: block;
+        width: 100%;
+        margin: 5px 0px 5px 0px;
+    }
+
+    .volunteer-detail > .top-box > .detail-box > li > button {
+        border: transparent;
+        background-color: #FF612C;
+        font-size: 12px;
+    }
+
+    /* 하단 봉사내용 박스 시작 */
+    .volunteer-detail > .bottom-box {
+        margin-top: 0px;
+        width: 100%;
+        height: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .volunteer-detail > .bottom-box > .title-box {
+        height: 50px;
+        margin-top: 0px;
+        margin-left: 10px;
+    }
+
+    .volunteer-detail > .bottom-box > .title-box > h1 {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .volunteer-detail > .bottom-box > .content-box {
+        height: 100% !important;
+        margin: 10px 5px 20px 10px;
+        overflow-y: auto;
+    }
+
+    .volunteer-detail > .bottom-box > .content-box > span {
+        display: block;
+        height: 100%;
+        font-size: 13px;
+    }
+}

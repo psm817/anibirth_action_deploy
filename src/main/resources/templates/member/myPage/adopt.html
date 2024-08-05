@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <div class="container h-full">
+        <div class="left-box card w-[500px]">
+            <div class="profile-box card-header flex flex-col items-center">
+                <div class="profile-img mt-[10px]">
+                    <img th:src="@{${member.thumbnailImg}}" alt="프로필사진">
+                </div>
+                <div class="profile-name mt-[15px]">
+                    <span th:text="${member.nickname}"></span>
+                </div>
+            </div>
+            <div class="menu-box-a card-header">
+                <ul class="list-group list-group-flush gap-6 mt-2">
+                    <li th:if="${member.authority} != 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>마이프로필</span></a>
+                    </li>
+                    <li th:if="${member.authority} == 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>회원목록</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center volunteer">
+                        <a th:href="@{/member/myPage/volunteer}"><span>봉사내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center adopt">
+                        <a th:href="@{/member/myPage/adopt}"><span>입양내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center donation">
+                        <a th:href="@{/member/myPage/donation}"><span>후원 및 마켓내역</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right-box card w-[100%] ">
+            <div class="title-box card-header flex items-center pl-[40px]">
+                <span>입양내역</span>
+            </div>
+            <div class="content-box card-header pl-[40px]">
+                <div class="total-box">
+                    <span th:if="${member.authority} == 2" th:text="${member.nickname} + '님이 입양하신 유기동물은 총 0 마리입니다.'"></span>
+                    <span th:if="${member.authority} == 1" th:text="${member.nickname} + '님이 등록하신 유기동물은 총 0 마리입니다.'"></span>
+                    <span th:if="${member.authority} == 0" th:utext="'애니버스에 등록된 유기동물은 총 <strong>' + ${#lists.size(animalList)} + '</strong>마리 입니다.'"></span>
+                </div>
+                <!-- 일반 회원일때 리스트 항목 -->
+                <div class="adopt-box-title card-body" th:if="${member.authority} == 2">
+                    <ul class="list-group list-group-flush gap-6">
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[5%]">번호</span>
+                            <span class="date w-[20%]">입양날짜</span>
+                            <span class="name w-[20%]">성별</span>
+                            <span class="type w-[20%]">유기동물 종류</span>
+                            <span class="shelter w-[20%]">소속보호소</span>
+                            <span class="picture w-[15%]">사진</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 최고/중간 관리자일때 리스트 항목 -->
+                <div class="adopt-box-title card-body" th:if="${member.authority} == 1 or ${member.authority} == 0">
+                    <ul class="list-group list-group-flush gap-6">
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[5%]">번호</span>
+                            <span class="date w-[20%]">공고날짜</span>
+                            <span class="name w-[15%]">성별</span>
+                            <span class="type w-[15%]">유기동물 종류</span>
+                            <span class="shelter w-[20%]">소속보호소</span>
+                            <span class="adoptCheck w-[15%]">입양여부</span>
+                            <span class="picture w-[15%]">사진</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 일반 회원일때 리스트 내용 -->
+                <div class="adopt-box-detail card-body" th:if="${member.authority == 2}">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[5%]">1</span>
+                            <span class="date w-[20%]">2024-07-22</span>
+                            <span class="name w-[20%]">뽀삐</span>
+                            <span class="type w-[20%]">강아지</span>
+                            <span class="shelter w-[20%]">대전센터</span>
+                            <span class="picture w-[15%]">
+                                <a class="btn btn-link" th:href="@{/}">미리보기</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 최고관리자일때 리스트 내용 -->
+                <div class="adopt-box-detail card-body" th:if="${member.authority} == 0">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center" th:each="animal, loop : ${animalList}">
+                            <span class="number w-[5%]" th:text="${loop.index} + 1"></span>
+                            <span class="date w-[20%]" th:text="${#temporals.format(animal.createDate, 'yyyy-MM-dd')}"></span>
+                            <span class="name w-[15%]" th:if="${animal.gender} == 1" th:text="'암컷'"></span>
+                            <span class="name w-[15%]" th:if="${animal.gender} == 2" th:text="'수컷'"></span>
+                            <span class="name w-[15%]" th:if="${animal.gender} == 4" th:text="'중성화'"></span>
+                            <span class="type w-[15%]" th:if="${animal.classification} == 1" th:text="'강아지'"></span>
+                            <span class="type w-[15%]" th:if="${animal.classification} == 2" th:text="'고양이'"></span>
+                            <span class="type w-[15%]" th:if="${animal.classification} == 3" th:text="'기타동물'"></span>
+                            <span class="shelter w-[20%]">대전유기견보호센터</span>
+                            <span class="adoptCheck w-[15%]">미정</span>
+                            <span class="picture w-[15%]">
+                                <a class="btn btn-link" th:href="@{|http://www.daejeon.go.kr/${animal.filePath}|}">미리보기</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 중간 관리자일때 리스트 내용 -->
+                <div class="adopt-box-detail card-body" th:if="${member.authority} == 1">
+                    <ul class="list-group list-group-flush">
+                        <!-- th:each로 반복문 돌려야됨  -->
+                        <li class="list-group-item flex items-center" th:each="animal, loop : ${animalList}">
+                            <span class="number w-[5%]" th:text="${loop.index} + 1"></span>
+                            <span class="date w-[20%]" th:text="${#temporals.format(animal.createDate, 'yyyy-MM-dd')}"></span>
+                            <span class="name w-[15%]" th:if="${animal.gender} == 1" th:text="'암컷'"></span>
+                            <span class="name w-[15%]" th:if="${animal.gender} == 2" th:text="'수컷'"></span>
+                            <span class="name w-[15%]" th:if="${animal.gender} == 4" th:text="'중성화'"></span>
+                            <span class="type w-[15%]" th:if="${animal.classification} == 1" th:text="'강아지'"></span>
+                            <span class="type w-[15%]" th:if="${animal.classification} == 2" th:text="'고양이'"></span>
+                            <span class="type w-[15%]" th:if="${animal.classification} == 3" th:text="'기타동물'"></span>
+                            <span class="shelter w-[20%]">대전유기견보호센터</span>
+                            <span class="adoptCheck w-[15%]">미정</span>
+                            <span class="picture w-[15%]">
+                                <a class="btn btn-link" th:href="@{|http://www.daejeon.go.kr/${animal.filePath}|}">미리보기</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

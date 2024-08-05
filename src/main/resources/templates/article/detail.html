@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<head>
+    <title>공지사항 상세</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/resource/article/detail.css}">
+</head>
+
+<body>
+<section layout:fragment="content" class="flex-1 flex flex-col items-center py-8">
+    <div class="container-all max-w-3xl p-6 bg-white shadow-md rounded-lg">
+        <!-- 제목과 메타 정보 -->
+        <header class="mb-6">
+            <h1 class="text-4xl font-bold mb-2" th:text="${article.title}"></h1>
+            <div class="text-gray-600 text-sm">
+                <span th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+                <span th:if="${article.modifyDate != null}" class="mx-2">|</span>
+                <span th:if="${article.modifyDate != null}" th:text="'수정: ' + ${#temporals.format(article.modifyDate, 'yyyy-MM-dd HH:mm')}"></span>
+                <span class="mx-2">|</span>
+                조회수: <span th:text="${article.viewCount}"></span>
+            </div>
+
+            <hr class="my-4 border-gray-300">
+        </header>
+
+        <!-- 내용 -->
+        <div class="content mb-6">
+            <p class="text-lg text-gray-800 leading-relaxed">
+                언제나 애니버스를 지지해 주시는 후원자님들께 안내 말씀 드립니다.
+            </p>
+            <p class="text-lg text-gray-800 leading-relaxed mt-4">
+                많은 후원자님들께서 애니버스 더봄센터에 후원해 주신 덕분에 애니버스 더봄센터는 무사히 완공이 되었습니다.
+            </p>
+            <p class="text-lg text-gray-800 leading-relaxed mt-4">
+                이에 2021년부터는 애니버스 더봄센터의 '벽돌 후원'과 '놀이터 후원' 항목을 '더봄센터건립' 항목으로 통합하여 운영할 예정입니다.
+            </p>
+            <p class="text-lg text-gray-800 leading-relaxed mt-4">
+                위와 같이 항목이 변경됨에 따라, 이전에 '벽돌 후원'과 '더봄센터 놀이터' 항목에 후원하셨던 후원자님들께서는 후원 항목의 명칭이 '더봄센터건립'으로 변경되더라도 혼동 없으시기를 바랍니다.
+            </p>
+            <p class="text-lg text-gray-800 leading-relaxed mt-4">
+                애니버스 더봄센터는 미완성 시설의 마무리를 위해 여전히 노력 중이며 후원자님들께서 더봄센터로 보내주시는 모든 후원금은 더봄센터의 모든 시설과 운영, 동물 돌봄을 위해 사용됩니다.
+            </p>
+            <p class="text-lg text-gray-800 leading-relaxed mt-4">
+                계속해서 애니버스 더봄센터에 많은 관심과 응원 부탁드립니다.
+            </p>
+            <p class="text-lg text-gray-800 leading-relaxed mt-4">
+                애니버스에 후원해 주셔서 항상 감사합니다.
+            </p>
+            <p class="text-lg text-gray-800 leading-relaxed mt-6" th:text="${article.content}">공지사항 내용</p>
+        </div>
+
+        <!-- 버튼 -->
+        <div class="flex justify-between mt-6">
+            <!-- 이전 버튼 -->
+            <a th:href="@{/article/{id}(id=${nextArticleId})}"
+               th:classappend="${nextArticleId == null} ? 'btn-disabled' : 'btn-primary'"
+               class="btn-primary">
+                이전
+            </a>
+            <!-- 목록 버튼 -->
+            <a th:href="@{/article/list}"
+               class="btn-primary">
+                목록
+            </a>
+            <!-- 다음 버튼 -->
+            <a th:href="@{/article/{id}(id=${prevArticleId})}"
+               th:classappend="${prevArticleId == null} ? 'btn-disabled' : 'btn-primary'"
+               class="btn-primary">
+                다음
+            </a>
+        </div>
+
+
+    </div>
+</section>
+</body>
+</html>
+
+
+

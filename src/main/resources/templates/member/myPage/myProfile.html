@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <div class="container h-full">
+        <div class="left-box card w-[500px]">
+            <div class="profile-box card-header flex flex-col items-center">
+                <div class="profile-img mt-[10px]">
+                    <img th:src="@{${member.thumbnailImg}}" alt="프로필사진">
+                </div>
+                <div class="profile-name mt-[15px]">
+                    <span th:text="${member.nickname}"></span>
+                </div>
+            </div>
+            <div class="menu-box-t card-header">
+                <ul class="list-group list-group-flush gap-6 mt-2">
+                    <li th:if="${member.authority} != 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>마이프로필</span></a>
+                    </li>
+                    <li th:if="${member.authority} == 0" class="list-group-item flex justify-center items-center profile">
+                        <a th:href="@{/member/myPage/myProfile}"><span>회원목록</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center volunteer">
+                        <a th:href="@{/member/myPage/volunteer}"><span>봉사내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center adopt">
+                        <a th:href="@{/member/myPage/adopt}"><span>입양내역</span></a>
+                    </li>
+                    <li class="list-group-item flex justify-center items-center donation">
+                        <a th:href="@{/member/myPage/donation}"><span>후원 및 마켓내역</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--  admin 일때   -->
+        <div th:if="${member.authority} == 0" class="right-box card w-[100%]">
+            <div class="title-box card-header flex items-center pl-[40px]">
+                <span>회원목록</span>
+            </div>
+            <div class="content-box card-header pl-[40px]">
+                <div class="total-box">
+                    <span th:utext="'애니버스에 등록된 회원 수는 총 <strong>' + ${#lists.size(memberList)} + '</strong>명 입니다.'"></span>
+                </div>
+                <div class="volunteer-box-title card-body">
+                    <ul class="list-group list-group-flush gap-6">
+                        <li class="list-group-item flex items-center">
+                            <span class="number w-[5%]">번호</span>
+                            <span class="id w-[15%]">ID</span>
+                            <span class="authority w-[15%]">활동/보호소/기업명</span>
+                            <span class="phone w-[17%]">전화번호</span>
+                            <span class="email w-[15%]">이메일</span>
+                            <span class="address w-[24%]">주소</span>
+                            <span class="isActive w-[8%]">승인여부</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="volunteer-box-detail card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item flex items-center" th:each="memberList, loop : ${memberList}">
+                            <span class="number w-[5%]" th:text="${loop.index} + 1"></span>
+                            <span class="id w-[15%]" th:if="${#strings.startsWith(memberList.username, 'NAVER')}" th:text="${#strings.substring(memberList.username, 0, 7)}"></span>
+                            <span class="id w-[15%]" th:unless="${#strings.startsWith(memberList.username, 'NAVER')}" th:text="${memberList.username}"></span>
+                            <span class="authority w-[15%]" th:text="${memberList.nickname}"></span>
+                            <span class="phone w-[18%]" th:text="${memberList.phone}"></span>
+                            <span class="email w-[15%]" th:text="${memberList.email}"></span>
+                            <span class="address w-[25%]" th:text="${memberList.address}"></span>
+                            <span class="isActive w-[7%]" th:if="${memberList.isActive} == 1">완료</span>
+                            <span class="isActive w-[7%]" th:if="${memberList.isActive} == 0">
+                                <form th:action="@{/member/myPage/approve}" method="POST">
+                                    <input type="hidden" name="username" th:value="${memberList.username}"/>
+                                    <button type="submit" class="btn btn-link" onclick="return confirm('해당 보호소/기업의 회원가입을 승인하시겠습니까?')">대기</button>
+                                </form>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div th:if="${member.authority} != 0" class="right-box card w-[100%]">
+            <div class="title-box card-header flex items-center">
+                <span>마이프로필</span>
+            </div>
+            <div class="content-box card-header">
+                <ul class="list-group list-group-flush gap-6">
+                    <li class="list-group-item flex items-center">
+                        <span>ID</span>
+                        <div class="text-box flex items-center">
+                            <span th:if="${#strings.startsWith(member.username, 'NAVER')}" th:text="${#strings.substring(member.username, 0, 20)}"></span>
+                            <span th:unless="${#strings.startsWith(member.username, 'NAVER')}" th:text="${member.username}"></span>
+                        </div>
+                    </li>
+                    <li class="list-group-item flex items-center">
+                        <span th:if="${member.authority} == 2">활동명</span>
+                        <span th:if="${member.authority} == 1">보호소/기업명</span>
+                        <div class="text-box flex items-center">
+                            <span th:text="${member.nickname}"></span>
+                        </div>
+                    </li>
+                    <li class="list-group-item flex items-center">
+                        <span>권한</span>
+                        <div class="text-box flex items-center">
+                            <span class="text-blue-600" th:if="${member.authority == 1}" th:text="'보호소/기업'"></span>
+                            <span class="text-blue-600" th:if="${member.authority == 2}" th:text="'일반회원'"></span>
+                        </div>
+                    </li>
+                    <li class="list-group-item flex items-center">
+                        <span>전화번호</span>
+                        <div class="text-box flex items-center">
+                            <span th:text="${member.phone}"></span>
+                        </div>
+                    </li>
+                    <li class="list-group-item flex items-center">
+                        <span>이메일</span>
+                        <div class="text-box flex items-center">
+                            <span th:text="${member.email}"></span>
+                        </div>
+                    </li>
+                    <li class="list-group-item flex items-center">
+                        <span>주소</span>
+                        <div class="text-box flex items-center">
+                            <span th:text="${member.address}"></span>
+                        </div>
+                    </li>
+                    <li class="list-group-item flex items-center" th:if="${member.authority} == 2">
+                        <span>애니포인트</span>
+                        <div class="text-box authority-box flex items-center">
+                            <span th:text="${account.aniPoint} + ' 원'"></span>
+                        </div>
+                        <div class="charge-box ml-[30px]">
+                            <a href="/points/recharge">충전하기</a>
+                        </div>
+                    </li>
+                    <li class="list-group-item flex items-center" th:if="${member.authority} == 1">
+                        <span>계좌번호</span>
+                        <div class="text-box authority-box flex items-center">
+                            <span th:text="${account.account_number}"></span>
+                        </div>
+                        <div class="charge-box ml-[30px]">
+                            <a href="">계좌수정</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="btn-box card-body flex items-center justify-center mt-[10px]">
+                    <a th:href="@{|/member/modify/${member.id}|}" class="modify-btn mr-[30px]">프로필 수정</a>
+                    <a th:href="@{|/member/delete/${member.id}|}" class="delete-btn ml-[30px]" onclick="return confirmDelete()">탈퇴하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

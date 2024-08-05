@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<section layout:fragment="content" class="flex-1 flex justify-center items-center">
+    <div class="container-box">
+        <div class="donation">
+            <div class="donation-wrapper">
+                <div class="donation-banner">
+                    <img src="https://i.ibb.co/37sdkLL/jv12281805-Photoroom-1.png" alt="Dog Shelter"
+                         class="background-image grid w-full h-[500px] ">
+                </div>
+            </div>
+            <div class="text-overlay">
+                <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">후원하기</h1>
+                <br>
+                <p class="mt-4 text-sm sm:text-base md:text-lg lg:text-xl">애니버스는 커뮤니티의 힘과 환원의 중요성을 믿습니다. 유기 동물 센터와 협력하여
+                    <br> 우리는
+                    버려진 동물들의 삶에 큰 변화를 가져오는 것을 목표로 합니다. <br>함께, 유기동물을 안전한 환경을 제공하여 유기동물을 사랑이 가득한 영원한 가족을 <br>찾을 수 있는 기회를
+                    보장할 수 있습니다.
+                </p>
+            </div>
+        </div>
+        <div class="top-donors-section">
+            <h2>애니버스에 도움을 준 사람들</h2>
+            <div class="donor-card-container">
+
+                <div class="donor-div" th:if="${topDonors != null and !#lists.isEmpty(topDonors)}" style="display: flex; gap: 120px;">
+
+                    <div class="donor-card" th:each="donorStat, iterStat : ${topDonors}">
+
+                        <div class="donor-card-content">
+                            <div class="profile-img">
+                                <img th:src="@{|${donorStat[0].thumbnailImg}|}" alt="프로필사진">
+                            </div>
+                            <h3 th:text="${donorStat[0].nickname}"></h3>
+                            <p th:text="${donorStat[1]} + ' 원'"></p>
+                        </div>
+                        <div class="ribbon">
+                            <div class="ribbon-stitches-top"></div>
+                            <div class="ribbon-content">
+                                <span th:if="${iterStat.index == 0}" th:text="'&#129351;'"></span> <!-- 1등 -->
+                                <span th:if="${iterStat.index == 1}" th:text="'&#129352;'"></span> <!-- 2등 -->
+                                <span th:if="${iterStat.index == 2}" th:text="'&#129353;'"></span> <!-- 3등 -->
+                                <span th:unless="${iterStat.index == 0 or iterStat.index == 1 or iterStat.index == 2}"
+                                      th:text="${iterStat.index + 1} + 'th'"></span> <!-- 다른 등수 -->
+                            </div>
+                            <div class="ribbon-stitches-bottom"></div>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${topDonors == null or #lists.isEmpty(topDonors)}">
+                    <p>현재 도움을 준 사람이 없습니다. 첫 기부자가 되어 주세요!</p>
+                </div>
+            </div>
+        </div>
+        <p>애니버스는 오직 시민의 후원으로 운영되며, 후원자의 지지가 있어 구조·정책·교육·돌봄 등 다양한 분야에서의 활동이 가능합니다.</p>
+
+        <div class="container">
+            <div class="donation-section">
+                <div class="donation-bg-img">
+                    <img src="https://i.ibb.co/D79qTFk/001.png" alt="센터 후원" class="center-background-image">
+                </div>
+                <div class="donation-box w-full md:w-2/5 mt-5 text-center md:text-center p-5">
+                    <h2>센터 후원</h2>
+                    <br>
+                    <p>구조된 동물이 평생의 가족을 만날 때까지 유기동물 보호센터로 후원합니다.</p>
+                    <a type="button" class="btn-donate" id="btnDonate">후원하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="donateModal" class="modal">
+        <div class="modal-content w-full md:w-2/5 mt-5 text-center md:text-center p-5">
+            <span class="close">&times;</span>
+            <h2>후원하기</h2>
+            <div class="modal-body">
+                <form action="/donation/submit" method="post">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <label for="recipient">센터 선택:</label>
+                    <select id="recipient" name="recipientId">
+                        <option th:each="recipient : ${recipients}"
+                                th:value="${recipient.id}"
+                                th:text="${recipient.nickname}"></option>
+                    </select>
+                    <label for="amount">금액 입력:</label>
+                    <input type="number" id="amount" name="amount" placeholder="금액을 입력하세요">
+                    <button th:if="${#authorization.expression('isAuthenticated()')}" type="submit">후원하기</button>
+                    <div class="login-message" th:if="${!#authorization.expression('isAuthenticated()')}">
+                        로그인 후 후원해주세요.
+                    </div>
+                </form>
+                <p>포인트 충전은 마이페이지에서 충전 할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+</html>

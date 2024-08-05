@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<head>
+    <style>
+        /* Card styles */
+        .recharge-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 32px;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            background: #fff;
+            margin: 20px auto;
+        }
+
+        .recharge-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: center;
+            gap: 20px;
+            color: #212121;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .recharge-content .heading {
+            font-weight: 700;
+            font-size: 32px;
+        }
+
+        .recharge-content .para {
+            line-height: 1.5;
+        }
+
+        .recharge-content .btn {
+            color: #e8e8e8;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .recharge-card::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+            z-index: -1;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .recharge-card:hover::before {
+            width: 100%;
+        }
+
+        .recharge-content .btn:hover {
+            outline: 2px solid #e8e8e8;
+            background: transparent;
+            color: #e8e8e8;
+        }
+
+        .content .btn:active {
+            box-shadow: none;
+        }
+
+        /* Page styles */
+        .section-recharge-points {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 50px 20px;
+        }
+
+        .recharge-container {
+            max-width: 50%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .btn-group .btn {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-group .btn:hover {
+            background-color: #FF416C;
+            color: #fff;
+        }
+
+        .form-control {
+            width: 40%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            justify-content: center;
+            text-align: center;
+            margin-left: 30%;
+        }
+
+        .btn-recharge {
+            width: 40%;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-recharge:hover {
+            background-color: #ff6b81;
+            border-color: #ff6b81;
+        }
+        @media (max-width: 793px) {
+            .recharge-content .btn-group {
+                max-width: 100%;
+                display: flex;
+                flex-wrap: wrap; /* 버튼들을 줄바꿈 */
+            }
+            .recharge-content .btn-group .btn-amount {
+                flex: 1 1 48%; /* 각 버튼이 화면의 약 절반 너비를 차지하도록 설정 */
+                margin: 5px 1%; /* 버튼 사이 간격 */
+                border-radius: 10px; /* 테두리 반경 유지 */
+                border-top-right-radius: 10px !important;
+                border-bottom-right-radius: 10px !important;
+            }
+            .recharge-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<section layout:fragment="content" class="section-recharge-points">
+    <div class="recharge-container mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-[1.5rem] font-bold flex justify-center pt-5 pb-5">포인트 충전</h1>
+
+        <div class="mb-3 recharge-card">
+            <div class="recharge-content ">
+                <span class="heading grid w-full">충전 금액</span>
+                <div class="btn-group mt-4 text-sm sm:text-base md:text-lg lg:text-xl" role="group"
+                     aria-label="충전 금액 선택">
+                    <button type="button" class="btn btn-outline-primary btn-amount" data-amount="1000">1,000원</button>
+                    <button type="button" class="btn btn-outline-primary btn-amount" data-amount="5000">5,000원</button>
+                    <button type="button" class="btn btn-outline-primary btn-amount" data-amount="10000">10,000원
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-amount" data-amount="50000">50,000원
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-amount" data-amount="100000">100,000원
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <form id="recharge-form" class="form">
+            <div class=" mb-3">
+                <label for="amount" class="form-label">직접 입력 충전 금액</label>
+                <input type="number" class="form-control" id="amount" name="amount">
+            </div>
+            <button type="button" class="btn btn-primary btn-recharge"
+                    style="background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);">충전
+            </button>
+        </form>
+
+        <div class="mt-5">
+            <h2 class="text-[1.25rem] font-bold">현재 잔액: <span id="current-balance">0</span> 원</h2>
+        </div>
+    </div>
+
+    <script src="https://js.tosspayments.com/v1"></script>
+    <script th:inline="javascript">
+        const tossPayments = TossPayments("test_ck_pP2YxJ4K879LGbonq7X2VRGZwXLO"); // 테스트 클라이언트 키
+
+        // 충전 금액 버튼 클릭 이벤트
+        document.querySelectorAll('.btn-amount').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelector('#amount').value = this.dataset.amount;
+            });
+        });
+
+        document.querySelector('.btn-recharge').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const amount = document.querySelector('#amount').value;
+            if (amount <= 0) {
+                alert('충전 금액을 입력해주세요.');
+                return;
+            }
+
+            const orderId = new Date().getTime();
+            const successUrl = window.location.origin + "/points/success";
+            const failUrl = window.location.origin + "/points/fail";
+
+            const requestJson = {
+                amount: amount,
+                orderId: "recharge-" + orderId,
+                orderName: "포인트 충전",
+                successUrl: successUrl,
+                failUrl: failUrl,
+                customerName: "박토스",
+                customerEmail: null,
+                customerMobilePhone: null,
+                useCardPoint: false,
+                flowMode: "DEFAULT"
+            };
+
+            tossPayments.requestPayment("카드", requestJson)
+                .catch(function (error) {
+                    if (error.code === 'USER_CANCEL') {
+                        console.log('사용자에 의해 취소되었습니다.');
+                    } else {
+                        console.error(error);
+                    }
+                });
+        });
+
+        // 현재 잔액을 표시하는 함수
+        function updateCurrentBalance(balance) {
+            document.querySelector('#current-balance').textContent = balance.toLocaleString();
+        }
+
+        // 페이지 로드 시 현재 잔액을 서버에서 가져와 표시
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/points/balance')
+                .then(response => response.json())
+                .then(data => {
+                    updateCurrentBalance(data.balance);
+                })
+                .catch(error => console.error('Error fetching balance:', error));
+        });
+    </script>
+</section>
+</body>
+</html>

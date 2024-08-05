@@ -1,0 +1,310 @@
+.volunteer-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.volunteer-box > .card {
+    height: 100%;
+}
+
+/* 봉사활동 입력 폼 */
+.modify-form {
+    display: flex;
+    flex-direction: column;
+    height: 100% !important;
+}
+
+.modify-form > .title-box {
+    display: flex;
+    align-items: center;
+    height: 90px;
+    padding-left: 50px;
+}
+
+.modify-form > .title-box > h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.modify-form > .modify-input {
+    height: 100%;
+}
+
+/* 권한 버튼 커스텀 */
+/* 폼 커스텀 */
+.modify-input > form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 50px;
+}
+
+.modify-input > form > .type-box {
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    align-items: center;
+}
+
+.modify-input > form > .date-box > input {
+    padding-right: 20px;
+}
+
+.modify-input > form > .type-box > span {
+    font-weight: 700;
+    font-size: 18px;
+    width: 130px;
+    text-align: left;
+    margin-right: 60px;
+}
+
+.modify-input > form > .type-box > input {
+    border: 1px solid #121212;
+    border-radius: 5px;
+    height: 70%;
+    width: 400px;
+    padding-left: 10px;
+}
+
+.modify-input > form > .location-box > input {
+    width: 300px;
+}
+
+.modify-input > form > .location-box > button {
+    margin-left: 16px;
+    background-color: #FF416C;
+    border: transparent;
+}
+
+.modify-input > form > .type-box > .file-box {
+    border: 0px;
+    height: 50%;
+    padding-left: 0px;
+}
+
+.modify-input > form > .type-box > textarea {
+    margin-left: 15px;
+    margin-right: 20px;
+}
+
+.modify-input > form > .signup-btn > button {
+    background-color: #FF416C;
+    border: 1px solid transparent;
+    padding: 5px 20px 5px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modify-input > form > .signup-btn > .cancel {
+    margin-right: 20px;
+}
+
+.modify-input > form > .signup-btn > .check {
+    margin-left: 20px;
+}
+
+.modify-input > form > .absolute-box {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 70%;
+    top: 88px;
+}
+
+.modify-input > form > .absolute-box > img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 카카오 맵 커스텀 */
+#kakaoMapModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 100%;
+}
+
+#kakaoMapModal > .modal-content {
+    margin-top: 100px;
+    margin-left: 670px;
+    height: 720px;
+}
+
+#kakaoMapModal > .modal-content > h2 {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#kakaoMapModal > .modal-content > .close {
+    position: absolute;
+    left: 92%;
+    top: -1.55%;
+    background-color: #fff;
+}
+
+#kakaoMapModal > .modal-content > .search-box {
+    display: flex;
+    justify-content: space-between;
+    height: 65px;
+}
+
+#kakaoMapModal > .modal-content > .search-box > input {
+    border: 1px solid #121212;
+    border-radius: 6px;
+    padding: 5px 0px 5px 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    flex-grow: 3;
+    flex-basis: 0;
+}
+
+#kakaoMapModal > .modal-content > .search-box > button {
+    background-color: #fffd8a;
+    font-weight: 700;
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+#kakaoMapModal > .modal-content > .search-box > button:hover {
+    background-color: #636221;
+    color: #fff;
+}
+
+#kakaoMapModal > .modal-content > .placesList {
+    border: 1px solid #121212;
+    border-radius: 10px;
+}
+
+#kakaoMapModal > .modal-content > .placesList > li {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 0.5px solid #121212;
+}
+
+#kakaoMapModal > .modal-content > .placesList > li:hover {
+    cursor: pointer;
+    background-color: #e3e3e3;
+}
+
+#kakaoMapModal > .modal-content > button {
+    background-color: #fffd8a;
+    margin-top: 15px;
+    border-radius: 10px;
+    color: #121212;
+    font-size: 16px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#kakaoMapModal > .modal-content > button:hover {
+    background-color: #636221;
+    color: #fff;
+}
+
+/* 반응형 시작 */
+@media (max-width: 394px) {
+    .volunteer-box {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .volunteer-box > .card {
+        height: 100% !important;
+    }
+
+    .modify-form {
+        height: 100%;
+        display: block !important;
+    }
+
+    .modify-form > .title-box {
+        height: 50px !important;
+        padding-left: 5px !important;
+    }
+
+    .modify-form > .title-box > h1 {
+        font-size: 16px !important;
+        font-weight: 700;
+    }
+
+    .modify-form > .modify-input {
+        height: 100%;
+        padding-left: 5px !important;
+    }
+
+    /* 권한 버튼 커스텀 */
+    /* 폼 커스텀 */
+    .modify-input > form {
+        display: block;
+        height: 100%;
+        padding-left: 0px;
+    }
+
+    .modify-input > form > .type-box {
+        width: 100%;
+        height: 60px;
+    }
+
+    .modify-input > form > .type-box > span {
+        font-weight: 700;
+        font-size: 13px;
+        margin-right: 0 !important;
+        width: 95px;
+    }
+
+    .modify-input > form > .type-box > input {
+        border: 1px solid #121212;
+        border-radius: 5px;
+        height: 70%;
+        width: 200px;
+        padding-left: 10px;
+    }
+
+    .modify-input > form > .location-box > input {
+        width: 170px;
+    }
+
+    .modify-input > form > .location-box > button {
+        margin-left: 8px;
+        background-color: #FF416C;
+        border: transparent;
+    }
+
+    .modify-input > form > .type-box > textarea {
+        height: 60px;
+        margin-left: 30px;
+        font-size: 13px;
+    }
+
+    .modify-input > form > .signup-btn {
+        margin-top: 20px;
+    }
+
+    .modify-input > form > .absolute-box {
+        display: none;
+    }
+
+    /* 카카오 맵 커스텀 */
+    #kakaoMapModal {
+        top: 59%;
+        width: 100%;
+        height: 100%;
+    }
+
+    #kakaoMapModal > .modal-content {
+        margin: 0px;
+        height: 750px;
+    }
+}

@@ -1,0 +1,219 @@
+.layout{
+    max-width: 600px;
+    margin: 0 auto;
+}
+.container-all{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.container-qna{
+    width: 100%;
+}
+
+/* 질문 리스트*/
+.qna{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+.qna > li{
+  padding: 10px 0;
+  box-sizing: border-box;
+  text-align: left;
+}
+.qna > li:nth-child(n+2){ /* 아이템 구분 점선 */
+  border-top: 1px dashed #aaa;
+}
+.qna input {
+  display: none;
+}
+
+.qna label { /* 제목 - 클릭 영역 */
+  font-weight: bold;
+  color: #000;
+  margin: 20px 0 0;
+  cursor: pointer;
+}
+.qna label::before { /* 제목 앞 화살표 */
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-left: 8px solid #a00;
+  margin: 2px 0 0 8px;
+  float: left;
+}
+.qna input:checked + label::before { /* 내용 펼침 상태 제목 앞 화살표 */
+  border: 8px solid transparent;
+  border-top: 8px solid #a00;
+  border-bottom: 0;
+  margin: 8px 4px 0;
+}
+
+.qna div { /* 내용 영역 - 기본 감춤 상태 */
+  display: none;
+  color: #666;
+  font-size: 0.9375em;
+  overflow: hidden;
+  padding: 10px 0 10px 30px;
+  box-sizing: border-box;
+  transition: max-height 0.4s;
+}
+.qna input:checked + label + div { /* 내용 영역 펼침 */
+  display: block;
+}
+
+/* 목록 */
+
+/* 링크 네비게이션 스타일 */
+.link-navigation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    margin: 40px;
+}
+
+.link {
+    color: #141214;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: #c23273;
+}
+
+.link.active {
+    color: #c23273;
+}
+
+/* 구분 기호 스타일 */
+.divider {
+    color: #6c757d;
+    margin: 0 0.5rem;
+}
+
+/* 컨테이너 스타일 */
+.container-list {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+    margin: 4rem auto; /* 전체 컨테이너에 상하 간격 추가 */
+    box-sizing: border-box;
+}
+
+
+/* 테이블 래퍼 스타일 */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 0 auto;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    padding: 0.5rem;
+    text-align: center; /* 중앙 정렬 */
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+td a {
+    color: #007bff;
+    text-decoration: none;
+}
+td.view-count {
+    padding-right: 2rem; /* 오른쪽 여백을 추가하여 오른쪽으로 이동 */
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+.button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0.25rem;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* 관리 링크 스타일 */
+.link-manage {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 0.25rem;
+}
+
+.link-manage:hover {
+    text-decoration: underline;
+}
+
+/* 페이지네이션 스타일 */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pagination-button, .pagination-number {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0 0.25rem;
+}
+
+.pagination-button:hover, .pagination-number:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.pagination-number.active {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.pagination-button.disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    border-color: #dee2e6;
+}
+
+@media all and (max-width:400px){
+    .container-all:100%;
+}
